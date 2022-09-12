@@ -1,0 +1,17 @@
+.body_Vm_edit{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+.mess_edit{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    text-align: center;
+    padding: 5rem;
+}
+.textVenda{
+    height: 15rem;
+    padding: 1rem;
+}

@@ -1,0 +1,12 @@
+.body_licencas{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.Cont-serie{
+    width: 80%;
+}
+.message_div{
+    height: 5%;
+}

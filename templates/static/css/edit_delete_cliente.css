@@ -1,0 +1,8 @@
+.body_del_edit{
+    width:  100%;
+    display: flex;
+    justify-content: center;
+}
+.mess_edit{
+    width: 60%;
+}

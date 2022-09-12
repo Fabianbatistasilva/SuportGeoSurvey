@@ -1,0 +1,61 @@
+{% extends 'base.html'%}
+{%load static%}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/base.css'%}">
+    <link rel="stylesheet" href="{% static 'css/edit_delete_cliente.css'%}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="static/materialize/css/materialize.min.css"  media="screen,projection"/>
+</head>
+{%block 'conteudo'%}
+<div class="body_del_edit">
+    <div class="mess_del">
+        <form method="post" action="">{% csrf_token %}
+            <label for="">
+                Você tem certeza em excluir essa Licença?
+            </label>
+            {%if licenca.cliente %}
+            <h3>{{licenca.cliente}}</h3>
+            {%else%}
+            <h3>{{licenca.modelo}}</h3>
+            {%endif%}
+
+            {%if licenca.Serial_Number %}
+            <label for=""> Nº de Série: {{licenca.Serial_Number}}</label>
+            <br>
+            {%endif%}
+            {%if licenca.numerodeSerie %}
+            <label for="">Nº de Série: {{licenca.numerodeSerie}}</label>
+            <br>
+            {%endif%}
+            {%if licenca.Produto %}
+            <label for=""> Produto: {{licenca.Produto}}</label>
+            <br>
+            {%endif%}
+            {%if licenca.Equipamento_Number %}
+            <label for="">Nº Equipamento: {{licenca.Equipamento_Number}}</label>
+            <br>
+            {%endif%}
+            {%if licenca.situacao %}
+            <label for="">Situacao: {{licenca.situacao}}</label>
+            <br>
+            {%endif%}
+            {%if licenca.Transfer_ID %}
+            <label for="">Transfer_ID: {{licenca.Transfer_ID}}</label>
+            <br>
+            {%endif%}
+            <div>
+                <button class="btn waves-effect grey darken-4" type="submit" name="action">Deletar
+                    <i class="material-icons right">send</i>
+                </button>
+                <a class="waves-effect waves-light btn" href="{% url 'licenças'%}">Não<i class="material-icons right">arrow_back</i></a>
+            </div>
+        </form>
+    </div>
+</div>
+{%endblock%}
+<script type="text/javascript" src="static/materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="{% static 'materialize/js/materialize.min.js'%}"></script>

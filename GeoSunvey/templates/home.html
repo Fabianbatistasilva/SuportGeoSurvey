@@ -1,0 +1,93 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block header%}<link rel="stylesheet" href="{% static 'css/home.css'%}">{%endblock header%}
+{%block 'conteudo'%}
+<div class="row">
+    <div class="col s12 m4 l3" id="Col-lateral">
+        <div class="ocorrencia-aberta">
+            <h6>Ocorrência Abertas</h6>
+            <hr>
+            {%for ocorrenciasaberta in ocorrencias_aberta%}
+            <a href="{% url 'ocorrenciauser' ocorrenciasaberta.id %}">{{ocorrenciasaberta.cliente}} | {{ocorrenciasaberta.tipo}}</a>
+            {%endfor%}
+        </div>
+    </div>
+    <div class="col s12 m8 l9"> 
+        <span class="span-date">
+            <div class="bem-vindo">
+                <h1>Home</h1>
+                {%if user%}
+                <label for="">Olá {{user.nome}}</label>
+                {%else%}
+                <label for="">Olá {{user_admin.username}}</label>
+                {%endif%}
+            </div>
+            <form action="{% url 'date_resultado' %}" method="get">
+                <div class="input-field">
+                    <label for="">Pesquisa por data</label>
+                  <input name="search" id="search" type="date" >
+                  <button type="submit" class="label-icon" for="search">Pesquisar</button>
+                </div>
+            </form>
+        </span>
+        <hr>
+        <div class="message_div">
+            {% if messages %}
+            <div class="messages">
+              {% for message in messages %}
+              <h6 {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h6>
+              {% endfor %}
+            </div>
+            {% endif %}           
+        </div>
+        <div class="w3-responsive">
+            <table class="w3-table-all">
+                <tbody>
+                    {%if ocorrencias%}
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Cliente</th>
+                            <th>Equipamento</th>
+                            <th>D.Atendimento</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    {%for ocorrencia in ocorrencias%}
+                    <tr>
+                        <td><a href="{% url 'ocorrenciauser' ocorrencia.id %}">{{ocorrencia.tipo}}</a></td>
+                        <td>{{ocorrencia.cliente}}</td>
+                        <td>{{ocorrencia.equipamento}}</td>
+                        <td>{{ocorrencia.created}}</td>
+                        {% if ocorrencia.status %}
+                        <td class="ocorrencia_disp">{{ocorrencia.status}}</td>
+                        {%endif%}
+                        <td><a href="{% url 'deletecorrencia' ocorrencia.id %}">Deletar</a></td>
+                    </tr>
+                    {%endfor%}
+                    {%endif%}
+                </tbody>
+            </table>
+            <div class="pagination">
+                {%if ocorrencias%}
+                <span class="step-links">
+                    {% if ocorrencias.has_previous %}
+                        <a href="?page={{ ocorrencias.previous_page_number }}">Anterior</a>
+                    {% endif %}
+            
+                    <span class="current">
+                        Página {{ ocorrencias.number }} de {{ ocorrencias.paginator.num_pages }}.
+                    </span>
+            
+                    {% if ocorrencias.has_next %}
+                        <a href="?page={{ ocorrencias.next_page_number }}">próxima</a>
+                    {% endif %}
+                </span>
+                {%endif%}
+            </div>
+        </div>          
+    </div>
+</div>
+{%endblock%}
+<script type="text/javascript" src="static/materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="{% static 'materialize/js/materialize.min.js'%}"></script>

@@ -1,0 +1,74 @@
+{% extends 'base.html'%}
+{%load static%}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/base.css'%}">
+    <link rel="stylesheet" href="{% static 'css/licencas.css'%}">
+    <link rel="stylesheet" href="{% static 'css/Criandolicencas.css'%}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="static/materialize/css/materialize.min.css"  media="screen,projection"/>
+    <title>{%block 'title'%}Criando Licença Geomax{%endblock%}</title>
+</head>
+{%block 'conteudo'%}
+<div class="body_createlicenca">
+    <div  class="cont_createlicenca">
+        <h1>Criando Licença Geomax</h1>
+        <div>
+            <form action="" method="post">{% csrf_token %}
+                <div class="message_div">
+                    {% if messages %}
+                    <div class="messages">
+                      {% for message in messages %}
+                      <h6 {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h6>
+                      {% endfor %}
+                    </div>
+                    {% endif %}           
+                </div>
+                <span>
+                    <h6 for="">Cliente</h6>
+                    <input list="clientelist" type="text" placeholder="Adicione o Cliente" name="cliente" id="">
+                    <datalist id="clientelist">
+                        {% for cliente in clientes %}
+                        <option value="{{cliente.nome}}">
+                        {% endfor %}
+                    </datalist>
+                </span>
+                <span>
+                    <h6 for="">Situação</h6>
+                    <select required name="situacao" class="browser-default">
+                        <option value="" disabled selected>Escolha o Situação </option>
+                        <option value="Livre">Livre</option>
+                        <option value="Usando">Usando</option>
+                        <option value="Demo">Demo</option>
+                    </select>
+                </span>
+                <span>
+                    <h6>Cidade</h6>
+                    <input placeholder="Adicione a Cidade" name="cidade" id="" type="text">
+                </span>
+                <span>
+                    <h6>Equipamento Number</h6>
+                    <input  placeholder="Adicione o Equipamento Number" name="Equipamento_Number" id="" type="text">
+                </span>
+                <span>
+                    <h6>Serial Number</h6>
+                    <input placeholder="Adicione o Serial Number" type="text" name="Serial_Number" id="">
+                </span>
+                <span>
+                    <h6>Situação</h6>
+                    <textarea class="text_area_observ" name="situacao" id="" cols="50" rows="50">
+
+                    </textarea>
+                </span>
+                <button class="btn waves-effect grey darken-4" type="submit" name="action">Submit
+                    <i class="material-icons right">send</i>
+                  </button>
+            </form>
+        </div>
+    </div>
+</div>
+{%endblock%}
+<script type="text/javascript" src="static/materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="{% static 'materialize/js/materialize.min.js'%}"></script>

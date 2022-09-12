@@ -1,0 +1,13 @@
+.body_del_edit{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+.mess_del{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    text-align: center;
+    padding: 5rem;
+}

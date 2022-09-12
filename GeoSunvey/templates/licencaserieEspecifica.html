@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block 'conteudo' %}
+<div class="body_licencaEspecifica">
+    <div class="conteudolicencaEspecifica">
+        <h4 for="">Licença de Série do {{licençaserie.cliente}}</h4>
+        <h6>Empresa: <strong>{{licençaserie.empresa}}</strong></h6>
+        <h6>Cidade: <strong>{{licençaserie.cidade}}</strong></h6>
+        <h6>Produto: <strong>{{licençaserie.Produto}}</strong> </h6>
+        <h6>Número de Série: <strong>{{licençaserie.numerodeSerie}}</strong> </h6>
+        <h6>Observações: <strong>{{licençaserie.Observaçoes}}</strong></h6>
+    </div>
+</div>
+{% endblock  %}
+
+    

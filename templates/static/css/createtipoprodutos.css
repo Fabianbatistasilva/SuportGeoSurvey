@@ -1,0 +1,8 @@
+.body_tipoproduto{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.cont_tipoproduto{
+    width: 75%;
+}

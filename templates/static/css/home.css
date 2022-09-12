@@ -1,0 +1,65 @@
+.span-date{
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+}
+.span-date > form{
+    display: flex;
+    width: 50%;
+}
+.span-date > form >div{
+    display: flex;
+    justify-content:center ;
+    align-items: center;
+    width: 100%;
+}
+.span-date > form >div > input{
+    display: flex;
+    width: 50%;
+}
+.span-date > form >div > button{
+    display: flex;
+    width: max-content;
+    height: max-content;
+    padding: 1rem;
+}
+.bem-vindo{
+    display: flex;
+    flex-direction: column;
+}
+.bem-vindo>label{
+    font-size: 20px;
+}
+.ocorrencia-aberta{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-right: 1px solid black;
+    padding: 0.5rem;
+}
+
+
+.info{
+    width: max-content;
+    font-size: 20px;
+    height: max-content;
+    padding: 1rem;
+    background-color: red;
+    color: white;
+    border-radius: 1rem;
+}
+.success{
+    width: max-content;
+    font-size: 20px;
+    height: max-content;
+    padding: 1rem;
+    background-color: green;
+    color: white;
+    border-radius: 1rem;
+}
+@media (max-width:600px) {
+    .ocorrencia-aberta{
+        display: none;
+    }
+}

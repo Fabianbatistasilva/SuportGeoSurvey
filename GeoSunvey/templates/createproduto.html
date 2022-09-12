@@ -1,0 +1,50 @@
+{%extends 'base.html'%}
+{% load static %}
+{%block header%}<link rel="stylesheet" href="{% static 'css/createproduto.css'%}">{%endblock header%}
+{%block 'title'%}Criando Produto{%endblock%}
+{%block 'conteudo'%}
+
+<div class="body_Produtos">
+    <div class="form_Produtos">
+        <h1>Criando Produto</h1>
+        <br>
+        <div class="message_div">
+            {% if messages %}
+            <div class="messages">
+              {% for message in messages %}
+              <h6 {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h6>
+              {% endfor %}
+            </div>
+            {% endif %}           
+        </div>
+        <br>
+        <form autocomplete="off" method="post" action="">{% csrf_token %}
+            <h6 for="nomeid">Nome</h6>
+            <input required type="text" name="name" id="nomeid">
+            <h6 for="modeloid">Modelo</h6>
+            <input type="text" name="modelo" id="modeloid">
+            <h6 for="marcaid">Marca</h6>
+            <input required list="marcalist" type="text" name="marca" id="marcaid">
+            <datalist id="marcalist">
+                <option value="Leica">Leica</option>
+                <option value="Geomax">Geomax</option>
+                <option value="Emlid">Emlid</option>
+                <option value="Sanding">Sanding</option>
+            </datalist>
+            <select required name="tipoproduto" class="browser-default">
+                <option value="" disabled selected>Escolha o Perfil do Produto</option>
+                {%for produto in produtostipos %}
+                <option value="{{produto.id}}">{{produto}}</option>
+                {%endfor%}
+            </select>
+            <hr>
+            <button class="btn waves-effect grey darken-4" type="submit" name="action">Submit
+              <i class="material-icons right">send</i>
+            </button>
+        </form>
+    </div>
+</div>
+
+{%endblock%}
+<script type="text/javascript" src="static/materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="{% static 'materialize/js/materialize.min.js'%}"></script>

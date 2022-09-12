@@ -1,0 +1,266 @@
+{% extends 'base.html'%}
+{%load static%}
+{%block 'conteudo'%}
+<div class="body_edit_licenca">
+    <div class="cont_edit_licenca">
+        <h1>Editar Licença</h1>
+        <form action="" method="post"> {% csrf_token %}
+            {% if licenca.cliente %}
+            <div class="div_dados">
+                {%if licenca.cliente != 'nan' %}
+                <h6 for="">Cliente atual: {{licenca.cliente}}</h6>
+                {%else%}
+                <h6 for="">Cliente atual: Não informado</h6>
+                {%endif%}
+                <input list="clientelist" placeholder="Altere o nome do cliente da licença" type="text" name="cliente" id="">
+                <datalist id='clientelist'>
+                    
+                    {% for cliente in clientes %}
+                    <option value="{{cliente}}"></option>
+                    {% endfor %}
+                </datalist>
+            </div>
+            {% endif %}
+
+            {% if licenca.situacao %}
+                <div class="div_dados">
+                    {%if licenca.situacao != 'nan' %}
+                    <h6 for="">Situacao: {{licenca.situacao}}</h6>
+                    {%else%}
+                    <h6 for="">Situacao: Não informado</h6>
+                    {%endif%}
+                    <input placeholder="Altere a situacao da licença" type="text" name="situacao" id="">
+                </div>
+            {% endif %}
+
+            {% if licenca.descriçao %}
+                <div class="div_dados">
+                    {%if licenca.descriçao != 'nan' %}
+                    <h6 for="">Descriçao: {{licenca.descriçao}}</h6>
+                    {%else%}
+                    <h6 for="">Descriçao: Não informado</h6>
+                    {%endif%}
+                    <textarea placeholder="Altere a Descriçao da licença" name="Descriçao" id="text_area_editlicenca" cols="30" rows="10"></textarea>
+                </div>
+            {% endif %}
+
+            {% if licenca.licença %}
+                <div class="div_dados">
+                    {%if licenca.licença != 'nan' %}
+                    <h6>Licença: {{licenca.licença}}</h6>
+                    {%else%}
+                    <h6 for="">Licença: Não informado</h6>
+                    {%endif%}
+                    <input placeholder="Altere a licença " type="text" name="licença" id="">
+                </div>
+            {% endif %}
+
+            {% if licenca.data_de_ativacao %}
+                <div class="div_dados">
+                    <h6>Data de ativacao: {{licenca.data_de_ativacao}}</h6>
+                    <input placeholder="Altere a Data de ativacao " type="text" name="data_de_ativacao" id="">
+                </div>
+            {% endif %}
+
+            {% if licenca.data_de_entrega %}
+                <div class="div_dados">
+                    <h6>Status: {{licenca.data_de_entrega}}</h6>
+                    <input placeholder="Altere o status " type="datetime" name="status" id="">
+                </div>
+            {% endif %}
+
+            {% if licenca.status %}
+                <div class="div_dados">
+                    <h6>Status: {{licenca.status}}</h6>
+                    <input placeholder="Altere o status " type="text" name="status" id="">
+                </div>
+            {% endif %}
+
+            {% if licenca.modelo %}
+                <div class="div_dados">
+                    {%if licenca.modelo != 'nan' %}
+                    <h6 for="">Modelo atual: {{licenca.modelo}}</h6>
+                    {%else%}
+                    <h6 for="">Modelo atual: Não informado</h6>
+                    
+                    {%endif%}
+                    <input placeholder="Altere o modelo da licença" type="text" name="modelo" id="">
+                </div>
+            {% endif %}
+            
+            {% if licenca.empresa %}
+                <div class="div_dados">
+                    {%if licenca.empresa != 'nan' %}
+                    <h6 for="">Empresa atual: {{licenca.empresa}}</h6>
+                    {%else%}
+                    <h6 for="">Empresa atual: Não informado</h6>
+                    {%endif%}
+                    <input placeholder="Altere a empresa da licença" type="text" name="empresa" id="">
+                </div>
+            {% endif %}
+
+            {% if licenca.modelo_coletora %}
+                <div class="div_dados">
+                    {%if licenca.modelo_coletora != 'nan' %}
+                    <h6 for="">Modelo coletora: {{licenca.modelo_coletora}}</h6>
+                    {%else%}
+                    <h6 for="">Modelo coletora: Não informado</h6>
+                    {%endif%}
+                    <input placeholder="Altere o modelo coletora da licença" type="text" name="modelo_coletora" id="">
+                </div>
+            {% endif %}
+            
+            {% if licenca.Equipamento_Number %}
+                <div class="div_dados">
+                    {%if licenca.Equipamento_Number != 'nan' %}
+                    <h6 for="">Equipamento Number: {{licenca.Equipamento_Number}}</h6>
+                    {%else%}
+                    <h6 for="">Equipamento Number: Não informado</h6>
+                    {%endif%}
+                    <input placeholder="Altere o Equipamento Number da licença" type="text" name="Equipamento_Number" id="">
+                </div>
+            {% endif %}
+
+            {% if licenca.Transfer_ID %}
+                <div class="div_dados">
+                    {%if licenca.Transfer_ID != 'nan' %}
+                    <h6 for="">Transfer ID: {{licenca.Transfer_ID}}</h6>
+                    {%else%}
+                    <h6 for="">Transfer ID: Não informado</h6>
+                    {%endif%}
+                    <input placeholder="Altere o Transfer ID da licença" type="text" name="Transfer_ID" id="">
+                </div>
+            {% endif %}
+
+            {% if licenca.Serial_Number_base %}
+                <div class="div_dados">
+                    {%if licenca.Serial_Number_base != 'nan' %}
+                    <h6 for="">Serial Number Base: {{licenca.Serial_Number_base}}</h6>
+                    {%else%}
+                    <h6 for="">Serial Number Base:  Não informado</h6>
+                    {%endif%}
+                    <input placeholder="Altere o Serial Number Base da licença" type="text" name="Serial_Number_base" id="">
+                </div>
+            {% endif %}
+
+            {% if licenca.Serial_Number_coletora %}
+                <div class="div_dados">
+                    {%if licenca.Serial_Number_coletora != 'nan' %}
+                    <h6 for="">Serial Number coletora: {{licenca.Serial_Number_coletora}}</h6>
+                    {%else%}
+                    <h6 for="">Serial Number coletora:  Não informado</h6>
+                    {%endif%}
+                    <input placeholder="Altere o Serial Number coletora da licença" type="text" name="Serial_Number_coletora" id="">
+                </div>
+            {% endif %}
+
+            {% if licenca.Serial_Number_rover %}
+                <div class="div_dados">
+                    {%if licenca.Serial_Number_rover != 'nan' %}
+                    <h6 for="">Serial Number rover: {{licenca.Serial_Number_rover}}</h6>
+                    {%else%}
+                    <h6 for="">Serial Number rover:  Não informado</h6>
+                    {%endif%}
+                    <input placeholder="Altere o Serial Number rover da licença" type="text" name="Serial_Number_rover" id="">
+                </div>
+            {% endif %}
+
+            {% if licenca.Serial_Number %}
+                <div class="div_dados">
+                    {%if licenca.Serial_Number != 'nan' %}
+                    <h6 for="">Serial Number : {{licenca.Serial_Number}}</h6>
+                    {%else%}
+                    <h6 for="">Serial Number : não informado</h6>
+                    {%endif%}
+                    <input placeholder="Altere o Serial Number  da licença" type="text" name="Serial_Number" id="">
+                </div>
+            {% endif %}
+            
+            {% if licenca.Aplicativo %}
+                <div class="div_dados">
+                    {%if licenca.Aplicativo != 'nan' %}
+                    <h6 for="">Aplicativo : {{licenca.Aplicativo}}</h6>
+                    {%else%}
+                    <h6 for="">Aplicativo : Não informado</h6>
+                    {%endif%}
+                    <input placeholder="Altere o Aplicativo  da licença" type="text" name="Aplicativo" id="">
+                </div>
+            {% endif %}
+
+            {% if licenca.Número_do_Kit %}
+                <div class="div_dados">
+                    {%if licenca.Número_do_Kit != 'nan' %}
+                    <h6 for="">Número do Kit : {{licenca.Número_do_Kit}}</h6>
+                    {%else%}
+                    <h6 for="">Número do Kit : Não informado</h6>
+                    {%endif%}
+                    <input placeholder="Altere o Número do Kit da licença" type="text" name="Número_do_Kit" id="">
+                </div>
+            {% endif %}
+
+            {% if licenca.Equipment_ID %}
+                <div class="div_dados">
+                    {%if licenca.Equipment_ID != 'nan' %}
+                    <h6 for="">Equipment ID: {{licenca.Equipment_ID}}</h6>
+                    {%else%}
+                    <h6 for="">Equipment ID: Não informado</h6>
+                    {%endif%}
+                    <input placeholder="Altere o Equipment ID da licença" type="text" name="Equipment_ID" id="">
+                </div>
+            {% endif %}
+
+            {% if licenca.cidade %}
+                <div class="div_dados">
+                    {%if licenca.cidade != 'nan' %}
+                    <h6 for="">Cidade atual: {{licenca.cidade}}</h6>
+                    {%else%}
+                    <h6 for="">Cidade atual: Não informado</h6>
+                    {%endif%}
+                    <input placeholder="Altere a Cidade da licença" type="text" name="cidade" id="">
+                </div>
+            {% endif %}
+            
+            {% if licenca.Produto %}
+                <div class="div_dados">
+                    {%if licenca.Produto != 'nan' %}
+                    <h6 for="">Produto atual: {{licenca.Produto}}</h6>
+                    {%else%}
+                    <h6 for="">Produto atual: Não informado</h6>
+                    {%endif%}
+                    <input list="produlist" placeholder="Altere o Produto da licença" type="text" name="Produto" id="">
+                    <datalist id="produlist">
+                        
+                        {% for produto in produtos %}
+                            <option value="{{produto}}"></option>
+                        {% endfor %}
+                            
+                    </datalist>
+                </div>
+            {% endif %}
+                
+            {% if licenca.numerodeSerie %}
+                <div class="div_dados">
+                    {%if licenca.numerodeSerie != 'nan' %}
+                    <h6 for="">Número de Série atual: {{licenca.numerodeSerie}}</h6>
+                    {%else%}
+                    <h6 for="">Número de Série atual: Não informado</h6>
+                    {%endif%}
+                    <input placeholder="Altere o número de Série da licença" type="text" name="numerodeSerie" id="">
+                </div>
+            {% endif %}   
+
+            {% if licenca.Observaçoes %}
+                <div class="div_dados">
+                    <p>Observaçôes atual: {{licenca.Observaçoes}}</p>
+                    <textarea placeholder="Altere o número de Série da licença" name="Observaçoes" id="text_area_editlicenca" cols="30" rows="10"></textarea>
+                </div>
+            {% endif %}  
+            <button class="btn waves-effect grey darken-4" type="submit" name="action">Submit
+                <i class="material-icons right">send</i>
+              </button>
+        </form>
+    </div>
+</div>
+{%endblock%}
+<script type="text/javascript" src="static/materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="{% static 'materialize/js/materialize.min.js'%}"></script>

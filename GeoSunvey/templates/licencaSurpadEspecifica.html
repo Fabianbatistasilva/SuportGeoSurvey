@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block 'conteudo' %}
+<div class="body_licencaEspecifica">
+    <div class="conteudolicencaEspecifica">
+        <h4 for="">Licença do Surpad do {{licençaserie.cliente}}</h4>
+
+        {%if licençaserie.licença and licençaserie.licença != 'nan'  %}
+        <h6>Licença: <strong>{{licençaserie.licença}}</strong></h6>
+        {%else%}
+        <h6>Licença:  <strong>Não Informado</strong></h6>
+        {%endif%}
+
+        {%if licençaserie.Transfer_ID and licençaserie.Transfer_ID != 'nan'  %}
+        <h6>Transfer ID: <strong>{{licençaserie.Transfer_ID}}</strong></h6>
+        {%else%}
+        <h6>Transfer ID:  <strong>Não Informado</strong></h6>
+        {%endif%}
+
+        {%if licençaserie.modelo and licençaserie.modelo != 'nan'  %}
+        <h6>Modelo: <strong>{{licençaserie.modelo}}</strong></h6>
+        {%else%}
+        <h6>Modelo:  <strong>Não Informado</strong></h6>
+        {%endif%}
+
+        {%if licençaserie.Serial_Number and licençaserie.Serial_Number != 'nan'  %}
+        <h6>Serial Number: <strong>{{licençaserie.Serial_Number}}</strong></h6>
+        {%else%}
+        <h6>Serial Number:  <strong>Não Informado</strong></h6>
+        {%endif%}
+        
+        {% if licençaserie.Observaçoes %}
+            <p>Observações: <strong>{{licençaserie.Observaçoes}}</strong></p>
+        {% endif %}
+    </div>
+</div>
+{% endblock  %}

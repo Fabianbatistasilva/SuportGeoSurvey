@@ -1,0 +1,59 @@
+{% extends 'base.html'%}
+{%load static%}
+{%block header%}<link rel="stylesheet" href="{% static 'css/editvendameta.css'%}">{%endblock header%}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/base.css'%}">
+    <link rel="stylesheet" href="{% static 'css/edit_delete_cliente.css'%}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="static/materialize/css/materialize.min.css"  media="screen,projection"/>
+</head>
+{%block 'conteudo'%}
+<div class="body_Vm_edit">
+    <div class="mess_edit">
+        <form method="post" action="">{% csrf_token %}
+            <h3>Descrição da Meta</h3>
+            <h5 for="">Equipe</h5>
+            <h6 for="">{{meta.Equipe}}</h6>
+            <h5 for="">Empresa</h5>
+            {%if meta.empresa%}
+            <h6 >{{meta.empresa}}"</h6>
+            {%else%}
+            <h6>Não informado</h6>
+            {%endif%}
+            <h5 for="">Cidade</h5>
+            <h6 for="">{{meta.cidade}}</h6>
+            <h5>Produto</h5>
+            <h6 for="">{{meta.Produto}}</h6>
+            <h5 for="">Modelo</h5>
+            {%if meta.modelo%}
+            <h6 >{{meta.modelo}}"</h6>
+            {%else%}
+            <h6>Não informado</h6>
+            {%endif%}
+            <h5 for="">Número de Série</h5>
+            {%if meta.numerodeSerie%}
+            <h6 >{{meta.numerodeSerie}}"</h6>
+            {%else%}
+            <h6>Não informado</h6>
+            {%endif%}
+            <h5 for="">Data de Entrega</h5>
+            {%if meta.dataEntrega%}
+            <h6 >{{meta.dataEntrega}}"</h6>
+            {%else%}
+            <h6>Não informado</h6>
+            {%endif%}
+            <h5 for="">Observações</h5>
+            <textarea class="textVenda"  name="Observaçoes" id="">{{meta.Observaçoes}}</textarea>
+            <h5 for="">Preço</h5>
+            <h6 for="">{{meta.preco}}</h6>
+            <hr>
+            <a href="{% url 'editmeta' meta.id%}" class="waves-effect waves-light btn-large"><i class="material-icons right">border_color</i>Editar</a>
+        </form>
+    </div>
+</div>
+{%endblock%}
+<script type="text/javascript" src="static/materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="{% static 'materialize/js/materialize.min.js'%}"></script>

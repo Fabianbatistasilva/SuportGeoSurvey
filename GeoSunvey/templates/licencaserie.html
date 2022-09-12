@@ -1,0 +1,97 @@
+{% extends 'base.html'%}
+{%load static%}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/base.css'%}">
+    <link rel="stylesheet" href="{% static 'css/licencas.css'%}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="static/materialize/css/materialize.min.css"  media="screen,projection"/>
+    <title>{%block 'title'%}Licença de Série{%endblock%}</title>
+</head>
+{%block 'conteudo'%}
+<div class="body_licencas">
+    <div class="Cont-serie">
+        <br>
+        <div class="row-cliente-1">
+            <h1>Licença de Série</h1>
+            <form action="{% url 'pesquisacliente'%}" method="get">{% csrf_token %}
+                <input list="clientelist" placeholder="Pesquise as Licença de Série" class="js-tooltip" type="search" name="searchcliente" id="">
+                <datalist id="clientelist">
+                    {%for licenca in licençaserie %}
+                    <option value="{{licenca}}">
+                    {%endfor%}
+                </datalist>a
+                <button class="btn btn-primary black js-tooltip" type="submit"><span>Pesquisa</span></button>
+            </form>
+        </div>
+        {%if quanti_licenca %}
+        <h6>Existem {{quanti_licenca}} licença de série</h6>
+        <a href="{% url 'createlicencaserie'%}">Criar licença de série</a>
+        {%else%}
+        <h6>Não Existem licença de série</h6>
+        <a href="{% url 'createlicencaserie'%}">Criar licença de série</a>
+        {%endif%}
+        {%if licençaserie%}
+        <table>
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Empresa</th>
+                    <th>Produto</th>
+                    <th>Número de Série</th>
+                    <th>Editar</th>
+                    <th>Deletar</th>
+                </tr>
+            <thead>
+            <tbody>
+                {%if licençaserie %}                </tr>
+                    {%for meta in licençaserie%}
+                    <tr>
+                    <td><a href="{% url 'LicençadeSerieEspecifica' meta.id %}">{{meta.cliente}}</a></td>
+                    {%if meta.empresa and meta.empresa != 'nan'  %}
+                    <td>{{meta.empresa}}</td>
+                    {%else%}
+                    <td>Não Informado</td>
+                    {%endif%}
+                    {%if meta.Produto %}
+                    <td>{{meta.Produto}}</td>
+                    {%else%}
+                    <td>Não Informado</td>
+                    {%endif%}
+                    {%if meta.numerodeSerie%}
+                    <td>{{meta.numerodeSerie}}</td>
+                    {%else%}
+                    <td>Não Informado</td>
+                    {%endif%}
+                    <td><a href="{% url 'LicençadeSerieEditar' meta.id %}">Editar</a></td>
+                    <td><a href="{% url 'deletarlicencaserie' meta.id  %}">Deletar</a></td>
+                </tr>
+                {%endfor%}
+                {%endif%}
+            </tbody>
+        </table>
+        <div class="pagination">
+            {%if licençaserie%}
+            <span class="step-links">
+                {% if licençaserie.has_previous %}
+                    <a href="?page={{ licençaserie.previous_page_number }}">Anterior</a>
+                {% endif %}
+        
+                <span class="current">
+                    Página {{ licençaserie.number }} de {{ licençaserie.paginator.num_pages }}.
+                </span>
+        
+                {% if licençaserie.has_next %}
+                    <a href="?page={{ licençaserie.next_page_number }}">próxima</a>
+                {% endif %}
+            </span>
+            {%endif%}  
+        </div>
+        {%endif%}
+    </div>
+</div>
+{%endblock%}
+<script type="text/javascript" src="static/materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="{% static 'materialize/js/materialize.min.js'%}"></script>

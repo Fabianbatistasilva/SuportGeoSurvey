@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/login.css'%}">
+    <link rel="stylesheet" href="{% static 'css/login.css'%}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="static/css/materialize/css/materialize.min.css"  media="screen,projection"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="static/materialize/css/materialize.min.css"  media="screen,projection"/>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="icon" type="image/x-icon" href="https://gstecnologias.com.br/wp-content/uploads/2021/06/logob.png">
+    <title>Login</title>
+</head>
+<body class="bodylogin  grey darken-4">
+    <div class="loginsection">
+        <div class="animationlogin">
+            <img class="responsive-img" src="https://gstecnologias.com.br/wp-content/uploads/2021/06/logob.png" alt="">
+            <p>Você quer se conectar com as pessoas que realmente importam na sua vida? Então, conheça o Reste, a rede social que reúne apenas os seus amigos verdadeiros.
+                Crie um perfil no Reste e comece a interagir com as pessoas que você ama. Aqui, todos os seus amigos estão juntos, sempre dispostos a compartilhar os melhores momentos da sua vida.
+                Conecte-se com as pessoas que você ama e compartilhe suas experiências. O Reste é a rede social que reúne apenas os seus amigos verdadeiros.
+            </p>
+        </div>
+        <div class="message_div">
+            {% if messages %}
+            <div class="messages">
+              {% for message in messages %}
+              <label {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</label>
+              {% endfor %}
+            </div>
+            {% endif %}           
+        </div>
+        <div class="contlogin">
+            <div class="login_user amber lighten-1">
+                <h1>Login</h1>
+                <form action="" method="post">{% csrf_token %}
+                    <label for="Emaillogin">Email</label>
+                    <input name="Email" type="text" id="Emaillogin" placeholder="Email">
+                    <label for="passwordlogin">Password</label>
+                    <input name="password" type="password" id="passwordlogin" placeholder="password">
+                    <button id="btnsend" class="btn waves-effect grey darken-4" type="submit" name="action">
+                        Submit
+                        <i class="material-icons right">send</i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="static/materialize/js/materialize.min.js"></script>
+    <script type="text/javascript" src="{% static 'materialize/js/materialize.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'materialize\js\materialize.js'%}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+</body>
+</html>

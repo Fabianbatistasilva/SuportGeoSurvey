@@ -1,0 +1,10 @@
+.body_search,.body_date_resultado{
+    width: 100%;
+    height: max-content;
+    display: flex;
+    justify-content: center;
+}
+.cont_search,.cont_date{
+    width: 75%;
+    height: max-content;
+}

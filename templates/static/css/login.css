@@ -1,0 +1,146 @@
+
+.bodylogin{
+    margin: 0%;
+    width: 100%;
+    height: 100vh;
+}
+.loginsection{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-areas:'message message' 'loginuser animationlogin';
+    grid-template-columns: 1fr  1fr;
+    grid-template-rows: 5rem 1fr ;
+}
+.animationlogin{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    grid-area:animationlogin ;
+}
+.animationlogin > img{
+    width: 90%;
+    height: 50%;
+}
+.animationlogin > p{
+    width: 90%;
+    height: 30%;
+    color: rgb(223, 246, 255);
+    font-size: 14px;
+    align-items: center;
+    text-align: justify;
+    background-color: rgba(216, 227, 231, 0.26);
+    border-radius: 2rem;
+    padding:1rem;
+}
+.contlogin{
+    width: 100%;
+    height: 100%;
+    grid-area:loginuser ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login_user{
+    width: 60%;
+    height: 75%;
+    border-radius: 11px;
+    box-shadow:  5px 5px 0px black,-5px -5px 0px black;
+    text-align:center;
+    color: rgb(216, 227, 231);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.login_user:hover{
+    box-shadow:  5px 5px 0px #fffde7,-5px -5px 0px #fffde7;
+}
+.login_user > form{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 50%;
+    justify-content: space-evenly;
+}
+.login_user > form > label{
+    font-size: 20px;
+    color: white;
+}
+#Emaillogin,#passwordlogin{
+    background-color: rgba(255, 255, 255, 0.336);
+    text-align: center;
+    border-radius: 10px 10px 5px 5px;
+    padding: 0.5rem;
+}
+#Emaillogin:focus,#passwordlogin:focus{
+    background-color: rgba(255, 255, 255, 0.87);
+}
+#btnsend {
+    height: 110px;
+}
+.message_div{
+    grid-area: message;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+.info{
+    width: 100%;
+    height: 20%;
+    font-size: 20px;
+    padding: 1rem;
+    display: flex;
+    color: white;
+    text-align: justify;
+    background-color: rgba(255, 0, 0, 0.507);
+    border-radius: 1rem;
+}
+.success{
+    width: 100%;
+    text-align: justify;
+    height: 20%;
+    font-size: 20px;
+    padding: 1rem 10rem 1rem 10rem;
+    display: flex;
+    color: black;
+    background-color: rgba(4, 153, 4, 0.63);
+    border-radius: 1rem;
+}
+.opLogin{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 10%;
+}
+.opLogin a{
+    width: max-content;
+    padding: 1rem;
+    color: antiquewhite;
+    text-decoration: none;
+    font-size: 18px;
+    background-color: rgba(216, 227, 231, 0.26);
+    border-radius: 15%;
+    border-bottom: 3px solid rgb(71, 181, 255);
+}
+.opLogin a:hover{
+   animation:2s cadastro linear 2;
+}
+@keyframes cadastro {
+    30%{
+        background-color:rgba(216, 227, 231, 0.50) ;
+        color: white;
+        border-bottom: 3px solid black;
+    }75%{
+        background-color:rgba(216, 227, 231) ;
+        color: black;
+        border-bottom: 3px solid black;
+    }
+}

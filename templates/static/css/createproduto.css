@@ -1,0 +1,10 @@
+.body_Produtos{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.form_Produtos{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+}

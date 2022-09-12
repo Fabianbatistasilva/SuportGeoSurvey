@@ -1,0 +1,45 @@
+{% extends 'base.html'%}
+{%load static%}
+{%block header%}<link rel="stylesheet" href="{% static 'css/deletevendameta.css'%}">{%endblock header%}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/base.css'%}">
+    <link rel="stylesheet" href="{% static 'css/edit_delete_cliente.css'%}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="static/materialize/css/materialize.min.css"  media="screen,projection"/>
+</head>
+{%block 'conteudo'%}
+<div class="body_del_edit">
+    <div class="mess_del">
+        <form method="post" action="">{% csrf_token %}
+            <h3 for="">
+                Você tem certeza em excluir esta meta da {{meta.Equipe}}?
+            </h3>
+            <h4>{{meta.objetivo}}</h4>
+            <div><label>Criado :{{meta.created}}</label></div>
+            <div>
+                {%if meta.data %}
+                <label for="">Data de entrega:{{meta.data}}</label>
+                {%endif%}
+                {%if meta.status == False %}
+                <label for="">Status: Pedente</label>
+                {%else%}
+                <label for="">Status: Finalizado</label>
+                {%endif%}
+            </div>
+            <br>
+            <div>
+                <button class="btn waves-effect grey darken-4" type="submit" name="action">
+                    Deletar
+                    <i class="material-icons right">send</i>
+                </button>
+                <a class="waves-effect waves-light btn" href="{% url 'listmeta'%}">Não<i class="material-icons right">arrow_back</i></a>
+            </div>
+        </form>
+    </div>
+</div>
+{%endblock%}
+<script type="text/javascript" src="static/materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="{% static 'materialize/js/materialize.min.js'%}"></script>

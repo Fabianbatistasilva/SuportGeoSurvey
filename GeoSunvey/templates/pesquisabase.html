@@ -1,0 +1,178 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block header%}<link rel="stylesheet" href="{% static 'css/pesquisabase.css'%}">{%endblock header%}
+{%block 'conteudo'%}
+<div class="body_search">  
+    <div class="cont_search">
+        {%if pesquisacliente or pesquisaocorrencia or pesquisaproduto or pesquisameta or pesquisavenda%}
+        <h4>Dados Pesquisa</h4>
+        {%if pesquisacliente%}
+        <h5>Clientes</h5>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                    <th>Tipo</th>
+                    <th>Editar</th>
+                    <th>Deletar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for clientes in pesquisacliente%}
+                <tr>
+                    <td>{{clientes.nome}}</td>
+                    {%if clientes.telefone == 'nan' or clientes.telefone == None or clientes.telefone == ''  %}
+                    <td>Não adicionado</td>
+                    {%else%}
+                    <td>{{clientes.telefone}}</td>
+                    {%endif%}
+                    {%if clientes.email == 'nan' or clientes.email == None or clientes.email == ''  %}
+                    <td>Não adicionado</td>
+                    {%else%}
+                    <td>{{clientes.email}}</td>
+                    {%endif%}
+                    <td>{{clientes.tipo}}</td>
+                    <td><a href="{% url 'editcliente' clientes.id %}">Editar</a></td>
+                    <td><a href="{% url 'deletecliente' clientes.id %}">Deletar</a></td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        {%endif%}
+        {%if pesquisaocorrencia %}
+        <h5>Ocorrência</h5>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Cliente</th>
+                    <th>Equipamento</th>
+                    <th>Status</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for ocorrencia in pesquisaocorrencia%}
+                <tr>
+                    <td><a href="{% url 'ocorrenciauser' ocorrencia.id %}">{{ocorrencia.tipo}}</a></td>
+                    <td>{{ocorrencia.cliente}}</td>
+                    <td>{{ocorrencia.equipamento}}</td>
+                    {% if ocorrencia.status == 'Aberto' %}
+                    <td class="ocorrencia_disp">{{ocorrencia.status}}</td>
+                    <td><a href="{% url 'finalizarocorrencia' ocorrencia.id %}">Finalizar</a></td>
+                    {%else%}
+                    <td class="ocorrencia_concluido">Finalizado</td>
+                    <td><a href="{% url 'abrirocorrencia' ocorrencia.id %}">Abrir</a></td>
+                    {%endif%}
+                    <td><a href="{% url 'deletecorrencia' ocorrencia.id %}">Deletar</a></td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        {%endif%}
+        {%if pesquisaproduto %}
+        <h5>Produtos</h5>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Modelo</th>
+                    <th>Marca</th>
+                    <th>Tipo</th>                </tr>
+            </thead>
+            <tbody>
+                {%for produto in pesquisaproduto%}
+                <tr>
+                    <td>{{produto.name}}</td>
+                    <td>{{produto.modelo}}</td>
+                    <td>{{produto.marca}}</td>
+                    <td>{{produto.tipo}}</td>
+                    {%if produto.quantidade%}
+                    <td>{{produto.quantidade}}</td>
+                    {%endif%}
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        {%endif%}
+        {% if pesquisameta %}
+        <h5>Metas</h5>
+        <table>
+            <thead>
+                <tr>
+                    <th>Equipe</th>
+                    <th>Objetivo</th>
+                    <th>Data</th>
+                    <th>Status</th>
+                    <th>Editar</th>
+                    <th>Deletar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {%for meta in pesquisameta%}
+                    <tr>
+                        <td>{{meta.Equipe}}</td>
+                        <td>{{meta.objetivo}}</td>
+                        <td>{{meta.data}}</td>
+                        {%if meta.status == False %}
+                        <td>Pedente</td>
+                        {%else%}
+                        <td>Finalizado</td>
+                        {%endif%}
+                        <td><a href="{% url 'editmeta' meta.id %}">Editar</a></td>
+                        <td><a href="{% url 'deletemeta' meta.id %}">Deletar</a></td>
+                    </tr>
+                    {%endfor%}
+                </tr>
+            </tbody>
+        </table>
+        {%endif%}
+        {%if pesquisavenda%}
+        <h1>Vendas</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Produto</th>
+                    <th>Data Entrega</th>
+                    <th>Preço</th>
+                    <th>Editar</th>
+                    <th>Deletar</th>
+                </tr>
+            <thead>
+            <tbody>
+                {%for venda in pesquisavenda%}
+                <tr>
+                    <td><a href="{% url 'vendauser' venda.id%}">{{venda.cliente}}</a></td>
+                    <td>{{venda.Produto}}</td>
+                    {%if venda.dataEntrega != None%}
+                    <td>{{venda.dataEntrega}}</td>
+                    {%else%}
+                    <td>Não Informado</td>
+                    {%endif%}
+                    {%if venda.preco != 0%}
+                    <td>{{venda.preco}}</td>
+                    {%else%}
+                    <td>Não Informado</td>
+                    {%endif%}
+                    <td><a href="{% url 'editvenda' venda.id %}">Editar</a></td>
+                    <td><a href="{% url 'deletevenda' venda.id %}">Deletar</a></td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        {%endif%}
+        {%else%}
+        <div class="nonepesquisa">
+            <h2 for="">Pesquisa não existe</h2>
+            <a href="{% url 'home'%}">Voltar para Home</a>
+        </div>
+        {%endif%}
+    </div>
+</div>
+{%endblock%}
+<script type="text/javascript" src="static/materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="{% static 'materialize/js/materialize.min.js'%}"></script>

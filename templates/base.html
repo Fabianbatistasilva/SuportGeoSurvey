@@ -1,0 +1,137 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/listvendameta.css'%}">
+    {%block header%}
+    {%endblock header%}
+    <link rel="stylesheet" href="{% static 'css/licencas.css'%}">
+    <link rel="stylesheet" href="{% static 'css/licencaedit.css'%}">
+    <link rel="stylesheet" href="{% static 'css/licencasEspecifica.css'%}">
+    <link rel="stylesheet" href="{% static 'css/licencas.css'%}">
+    <link rel="stylesheet" href="{% static 'css/edit_delete_cliente.css'%}">
+    <link rel="stylesheet" href="{% static 'css/base.css'%}">
+    <link rel="stylesheet" href="{% static 'css/home.css'%}">
+    <link rel="stylesheet" href="{% static 'css/login.css'%}">
+    <link rel="stylesheet" href="{% static 'css/cadastro.css'%}">
+    <link rel="stylesheet" href="{% static 'css/base.css'%}">
+    <link rel="stylesheet" href="{% static 'css/listprodutos.css'%}">
+    <link rel="stylesheet" href="{% static 'css/listcliente.css'%}">
+    <link rel="stylesheet" href="{% static 'css/Criandolicencas.css'%}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="static/materialize/css/materialize.min.css"  media="screen,projection"/>
+    <!--Import Google Icon Font-->
+    <link type="text/css" rel="stylesheet" href="{%  static  'materialize/css/materialize.min.css' %}"  media="screen,projection"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="icon" type="image/x-icon" href="https://gstecnologias.com.br/wp-content/uploads/2021/06/logob.png">
+    <title>{%block 'title'%}{%endblock%}</title>
+</head>
+<body>
+  <nav id='navegar_base' class="nav-extended grey darken-4">
+    <div class="nav-wrapper">
+      <a href="{% url 'home'%}" class="brand-logo">
+        <img class="responsive-img" src="https://gstecnologias.com.br/wp-content/uploads/2021/06/logob.png" alt="">
+      </a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a class="buttons_header_row1" href="{% url 'home'%}">Home</a></li>
+        <li><a class="buttons_header_row1" href="{% url 'produtos' %}">Produtos</a></li>
+        <li><a class="buttons_header_row1"  href="{% url 'clientes' %}">Clientes</a></li>
+        <li><a class="buttons_header_row1" href="{% url 'logout'%}">Logout</a></li>
+      </ul>
+    </div>
+    <div class="nav_search">
+      <div class="div-mobile">
+        <details  data-target="mobile-demo" class="det-mobile">
+          <summary class="summary_mobile"><i class="material-icons">menu</i></summary>
+          <a class="a_mobile" href="{% url 'home'%}">Home</a>  
+          <a class="a_mobile" href="{% url 'listmeta'%}">Metas</a>
+          <a class="a_mobile" href="{% url 'listvenda'%}">Vendas</a>
+          <a class="a_mobile" href="{% url 'listocorrencia'%}">Atendimento</a> 
+          <a class="a_mobile" href="{% url 'produtos' %}">Produtos</a> 
+          <a class="a_mobile" href="{% url 'clientes' %}">Clientes</a>
+          <a class="a_mobile" href="{% url 'logout'%}">logout</a>
+        </details>
+      </div>
+      <form action="{% url 'search_resultado' %}" method="get">
+        <div class="input-field">
+          <input name="search" id="search" type="search" >
+          <button type="submit" class="label-icon" for="search"><i class="material-icons">search</i></button>
+        </div>
+      </form>
+      <div class="opcao-adicionais">
+        <a href="{% url 'listmeta'%}">Metas</a>
+        <a href="{% url 'listvenda'%}">Vendas</a>
+        <a href="{% url 'listocorrencia'%}">Atendimento</a>
+      </div>
+    </div>
+    <div class="nav_op_criars">
+      <div id="nav_create_models" class="nav-content">
+        <div class="nav_create_models">
+          <a  href="{% url 'createclientes'%}">Criar Cliente</a>
+          <a href="{% url 'atender'%}">Criar Atendimento</a>
+          <a  href="{% url 'createprodutos'%}"> Criar Produto </a> 
+        </div>
+      </div>
+      <details class="det-opc-add">
+        <summary class="summary-op-add">Licenças</summary>
+        <div class="div-op-add">
+          <a class="a-op-add" href="{% url 'licenças' %}">Todos</a>
+          <a class="a-op-add" href="{% url 'LicençadeSerie' %}">Licença de Série</a>
+          <a class="a-op-add" href="{% url 'LicençaGeoMax' %}">Licença GeoMax</a>
+          <a class="a-op-add"  href="{% url 'LicencaSurPad' %}">Licença SurPad</a>
+          <a class="a-op-add"  href="{% url 'licenças' %}">Licença XPAD</a>
+          <a class="a-op-add"  href="{% url 'licenças' %}">Licença SURVX</a>
+          <a class="a-op-add"  href="{% url 'LicençaAplitop' %}">Licença Aplitop</a>
+          <a class="a-op-add"  href="{% url 'licenças' %}">Kit de Locação</a>
+        </div>
+      </details>
+    </div>
+    <hr>
+  </nav>   
+  <main class="main-base">
+    {%block 'conteudo'%}
+    {%endblock%}
+  </main>
+  <footer class="page-footer grey darken-4">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Geo Survey Suporte</h5>
+          <p class="grey-text text-lighten-4">A GeoSurvey é uma empresa fornecedora de soluções em equipamentos, acessórios e softwares para profissionais Geomensores (Topógrafos, Técnicos em Agrimensura, Engenheiros Agrimensores e demais profissionais que atuam com levantamentos topográficos). 
+            Distribuidor oficial de marcas de ponta no mercado como: Leica, GeoMax, Emlid e Matterport, aqui você encontrará soluções de ponta aliadas ao nosso suporte técnico, que reforça um de nossos pilares em trazer uma negociação segura para os profissionais..
+          </p>
+        </div>
+        <div class="col l4 offset-l2 s12">
+          <h5 class="white-text">Links</h5>
+          <ul>
+            <li><a class="grey-text text-lighten-3" href="http://www.gstecnologias.com.br"> Site: Gstecnologias</a></li>
+            <hr>
+            <li>Número de telefone: 08004941600</li>
+            <hr>
+            <li>Setor :Varejo de equipamentos de escritório</li>
+            <hr>
+            <li><a class="grey-text text-lighten-3" href="https://www.linkedin.com/in/fabian-batista-965420214/">Feito por Fabian</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      © 2014 Copyright Text
+      <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+      </div>
+    </div>
+  </footer>
+      
+  <script type="text/javascript" src="static/materialize/js/materialize.min.js"></script>
+  <script type="text/javascript" src="{% static 'materialize/js/materialize.min.js'%}"></script>
+  <script type="text/javascript" src="{% static 'materialize\js\materialize.js'%}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+</body>
+</html>

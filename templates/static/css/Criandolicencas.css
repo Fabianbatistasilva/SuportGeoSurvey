@@ -1,0 +1,13 @@
+.body_createlicenca{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cont_createlicenca{
+    width:70%;
+}
+.text_area_observ{
+    height: 15rem;
+    border: 6px double black;
+}

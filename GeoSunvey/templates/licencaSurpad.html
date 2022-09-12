@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{%load static%}
+{%block 'conteudo'%}
+<div class="body_licencas">
+    <div class="Cont-serie">
+        <h1>Licença do SurPad</h1>
+        {%if quanti_licenca %}
+        <h6>Existem {{quanti_licenca}} licença SurPad</h6>
+        <a href="{% url 'createlicençasSurpad'%}">Criar licença SurPad</a>
+        {%else%}
+        <h6>Não Existem licença SurPad</h6>
+        <a href="{% url 'createlicençasSurpad'%}">Criar licença SurPad</a>
+        {%endif%}
+        {% if licençasurpad %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Licença</th>
+                    <th>Transferência ID</th>
+                    <th>Modelo</th>
+                    <th>Número de Série</th>
+                    <th>Editar</th>
+                    <th>Deletar</th>
+                </tr>
+            </thead>
+            {%for meta in licençasurpad%}
+            <tr>
+                <td><a href="{% url 'LicençadeSurpadEspecifica' meta.id%}">{{meta.cliente}}</a></td>
+                {%if meta.licença and meta.licença != 'nan'  %}
+                <td>{{meta.licença}}</td>
+                {%else%}
+                <td>Não Informado</td>
+                {%endif%}
+                {%if meta.Transfer_ID and meta.Transfer_ID != 'nan'  %}
+                <td>{{meta.Transfer_ID}}</td>
+                {%else%}
+                <td>Não Informado</td>
+                {%endif%}
+                {%if meta.modelo and meta.modelo != 'nan' %}
+                <td>{{meta.modelo}}</td>
+                {%else%}
+                <td>Não Informado</td>
+                {%endif%}
+                {%if meta.Serial_Number and meta.Serial_Number != 'nan'  %}
+                <td>{{meta.Serial_Number}}</td>
+                {%else%}
+                <td>Não Informado</td>
+                {%endif%}
+                <td><a href="{% url 'EditarLicencaSurpad' meta.id %}">Editar</a></td>
+                <td><a href="{% url 'deletarLicencasurpad' meta.id %}">Deletar</a></td>
+            </tr>
+            {%endfor%}
+        </table>
+        <div class="pagination">
+            {%if licençaserie%}
+            <span class="step-links">
+                {% if licençaserie.has_previous %}
+                    <a href="?page={{ licençaserie.previous_page_number }}">Anterior</a>
+                {% endif %}
+        
+                <span class="current">
+                    Página {{ licençaserie.number }} de {{ licençaserie.paginator.num_pages }}.
+                </span>
+        
+                {% if licençaserie.has_next %}
+                    <a href="?page={{ licençaserie.next_page_number }}">próxima</a>
+                {% endif %}
+            </span>
+            {%endif%}  
+        </div>
+        {% endif %}
+    </div>
+</div>
+{%endblock%}
+<script type="text/javascript" src="static/materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="{% static 'materialize/js/materialize.min.js'%}"></script>
+
+    

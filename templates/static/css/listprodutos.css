@@ -1,0 +1,9 @@
+.body_produtos{
+    width: 100%;
+    height: max-content;
+    display: flex;
+    justify-content: center;
+}
+.produtos_list{
+    width: 75%;
+}

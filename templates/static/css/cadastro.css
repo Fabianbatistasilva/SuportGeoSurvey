@@ -1,0 +1,82 @@
+
+.bodyCadastro{
+    margin: 0%;
+    width: 100%;
+}
+.cadastrosection{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.message_div{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.info{
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    padding: 1rem 20rem 1rem 20rem;
+    display: flex;
+    color: black;
+    background-color: rgba(255, 0, 0, 0.507);
+    border-radius: 1rem;
+}
+.success{
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    padding: 1rem 20rem 1rem 20rem;
+    display: flex;
+    color: black;
+    background-color: rgba(4, 153, 4, 0.63);
+    border-radius: 1rem;
+}
+
+.contCadastro{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+}
+.cadastroUser{
+    width: 80%;
+    height: 100%;
+    border-radius: 11px;
+    text-align:center;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.cadastroUser > form{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 100%;
+    justify-content: space-evenly;
+    color: black;
+}
+.cadastroUser > form > label{
+    font-size: 18px;
+    color: black;
+}
+#usernameCadastro,#passwordCadastro{
+    height: 2rem;
+    background-color: rgba(255, 255, 255, 0.336);
+    text-align: center;
+    border-radius: 10px 10px 5px 5px;
+    border-bottom: 3px solid rgb(71, 181, 255);
+    appearance: none;
+    
+}
+#usernameCadastro:focus,#passwordCadastro:focus{
+    background-color: rgba(255, 255, 255, 0.87);
+    border-bottom: 3px solid rgb(71, 181, 255);
+}

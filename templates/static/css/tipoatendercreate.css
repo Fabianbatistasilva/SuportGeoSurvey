@@ -1,0 +1,8 @@
+.body_tipoAtender{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.cont_tipoAtender{
+    width: 75%;
+}

@@ -1,0 +1,14 @@
+.body_edit_licenca{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.cont_edit_licenca{
+    width: 70%;
+}
+
+#text_area_editlicenca{
+    height:17rem;
+    border:4px double black;
+    padding: 1rem;
+}

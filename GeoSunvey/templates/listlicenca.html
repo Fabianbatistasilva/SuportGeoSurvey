@@ -1,0 +1,275 @@
+{% extends 'base.html'%}
+{%load static%}
+{%block 'title'%}Licenças{%endblock%}
+{%block header%}<link rel="stylesheet" href="{% static 'css/listlicenças.css'%}">{%endblock header%}
+{%block 'conteudo'%}
+<div class="row">
+    <div class="col s12 m4 l3">
+        <div class="licenças_opcao">
+            <div><h5>Licenças </h5></div>
+            <a class="a-op-add" href="{% url 'LicençadeSerie' %}">Licença de Série</a>
+            <a class="a-op-add" href="{% url 'LicençaGeoMax' %}">Licença GeoMax</a>
+            <a class="a-op-add"  href="{% url 'LicencaSurPad' %}">Licença SurPad</a>
+            <a class="a-op-add"  href="{% url 'licenças' %}">Licença XPAD</a>
+            <a class="a-op-add"  href="{% url 'licenças' %}">Licença SURVX</a>
+            <a class="a-op-add"  href="{% url 'LicençaAplitop' %}">Licença Aplitop</a>
+            <a class="a-op-add"  href="{% url 'licenças' %}">Kit de Locação</a>
+        </div>
+    </div>
+    <div class="col s12 m8 l9">
+        <div class="metas_list">
+            <div class="message_div">
+                {% if messages %}
+                <div class="messages">
+                  {% for message in messages %}
+                  <h6 {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h6>
+                  {% endfor %}
+                </div>
+                {% endif %}           
+            </div>
+            <h1>Licenças</h1>
+            {%if soma %}
+            <h6>Existem {{soma}} Licenças </h6>
+            {%else%}
+            <h6>Não Existem Licença</h6>
+            {%endif%}
+            <table>
+                <tbody>
+                    {%if licençaserie %}
+                    <tr>
+                        <th>Licença de Série</th>
+                    </tr>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Empresa</th>
+                        <th>Produto</th>
+                        <th>Número de Série</th>
+                        <th>Editar</th>
+                        <th>Deletar</th>
+                    </tr>
+                    {%for meta in licençaserie%}
+                    <tr>
+                        <td><a href="{% url 'LicençadeSerieEspecifica' meta.id %}">{{meta.cliente}}</a></td>
+                        {%if meta.empresa and meta.empresa != 'nan'  %}
+                        <td>{{meta.empresa}}</td>
+                        {%else%}
+                        <td>Não Informado</td>
+                        {%endif%}
+                        {%if meta.Produto %}
+                        <td>{{meta.Produto}}</td>
+                        {%else%}
+                        <td>Não Informado</td>
+                        {%endif%}
+                        {%if meta.numerodeSerie%}
+                        <td>{{meta.numerodeSerie}}</td>
+                        {%else%}
+                        <td>Não Informado</td>
+                        {%endif%}
+                        <td><a href="{% url 'LicençadeSerieEditar' meta.id %}">Editar</a></td>
+                        <td><a href="{% url 'deletarlicencaserie' meta.id  %}">Deletar</a></td>
+                    </tr>
+                    {%endfor%}
+                    {%endif%}
+                    
+                    {%if Licençaaplitop %}
+                    <tr>
+                        <th>Licença do aplitop</th>
+                    </tr>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Licença</th>
+                        <th>Data de ativação</th>
+                        <th>Número de Série</th>
+                        <th>Status</th>
+                        <th>Editar</th>
+                        <th>Deletar</th>
+                    </tr>
+                    {%for meta in Licençaaplitop%}
+                    <tr>
+                        <td><a href="{% url 'LicençadeAplitopEspecifica' meta.id%}">{{meta.cliente}}</a></td>
+                        {%if meta.licença and meta.licença != 'nan'  %}
+                        <td>{{meta.licença}}</td>
+                        {%else%}
+                        <td>Não Informado</td>
+                        {%endif%}
+                        {%if meta.data_de_ativacao and meta.data_de_ativacao != 'nan'  %}
+                        <td>{{meta.data_de_ativacao}}</td>
+                        {%else%}
+                        <td>Não Informado</td>
+                        {%endif%}
+                        {%if meta.Serial_Number and meta.Serial_Number != 'nan' %}
+                        <td>{{meta.Serial_Number}}</td>
+                        {%else%}
+                        <td>Não Informado</td>
+                        {%endif%}
+                        {%if meta.status and meta.status != 'nan'  %}
+                        <td>{{meta.status}}</td>
+                        {%else%}
+                        <td>Não Informado</td>
+                        {%endif%}
+                        <td><a href="{% url 'EditarLicencaAplitop' meta.id %}">Editar</a></td>
+                        <td><a href="{% url 'deletarlicencaaplitop' meta.id  %}">Deletar</a></td>
+                    </tr>
+                    {%endfor%}
+                    {%endif%}
+
+
+                    {%if Licençageomax %}
+                    <tr>
+                        <th>Licença do GeoMax</th>
+                    </tr>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Cidade</th>
+                        <th>Nº Equipamento</th>
+                        <th>Número de Série</th>
+                        <th>Editar</th>
+                        <th>Deletar</th>
+                    </tr>
+                    {%for meta in Licençageomax%}
+                    <tr>
+                        <td><a href="{% url 'LicençaGeoMaxEspecifica' meta.id%}">{{meta.cliente}}</a></td>
+                        {%if meta.cidade and meta.cidade != 'nan'  %}
+                        <td>{{meta.cidade}}</td>
+                        {%else%}
+                        <td>Não Informado</td>
+                        {%endif%}
+                        {%if meta.Equipamento_Number %}
+                        <td>{{meta.Equipamento_Number}}</td>
+                        {%else%}
+                        <td>Não Informado</td>
+                        {%endif%}
+                        {%if meta.Serial_Number%}
+                        <td>{{meta.Serial_Number}}</td>
+                        {%else%}
+                        <td>Não Informado</td>
+                        {%endif%}
+                        <td><a href="{% url 'LicençaGeoMaxEditar' meta.id %}">Editar</a></td>
+                        <td><a href="{% url 'deletarLicencageomax' meta.id %}">Deletar</a></td>
+                    </tr>
+                    {%endfor%}
+                    {%endif%}
+
+
+                    {%if Licençasurpad %}
+                    <tr>
+                        <th>Licença do SurPad</th>
+                    </tr>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Licença</th>
+                        <th>Transferência ID</th>
+                        <th>Modelo</th>
+                        <th>Número de Série</th>
+                        <th>Editar</th>
+                        <th>Deletar</th>
+                    </tr>
+                    {%for meta in Licençasurpad%}
+                    <tr>
+                        <td><a href="{% url 'metauser' meta.id%}">{{meta.cliente}}</a></td>
+                        {%if meta.licença and meta.licença != 'nan'  %}
+                        <td>{{meta.licença}}</td>
+                        {%else%}
+                        <td>Não Informado</td>
+                        {%endif%}
+                        {%if meta.Transfer_ID and meta.Transfer_ID != 'nan'  %}
+                        <td>{{meta.Transfer_ID}}</td>
+                        {%else%}
+                        <td>Não Informado</td>
+                        {%endif%}
+                        {%if meta.modelo and meta.modelo != 'nan' %}
+                        <td>{{meta.modelo}}</td>
+                        {%else%}
+                        <td>Não Informado</td>
+                        {%endif%}
+                        {%if meta.Serial_Number and meta.Serial_Number != 'nan'  %}
+                        <td>{{meta.Serial_Number}}</td>
+                        {%else%}
+                        <td>Não Informado</td>
+                        {%endif%}
+                        <td><a href="{% url 'EditarLicencaSurpad' meta.id %}">Editar</a></td>
+                        <td><a href="{% url 'deletarLicencasurpad' meta.id %}">Deletar</a></td>
+                    </tr>
+                    {%endfor%}
+                    {%endif%}
+
+
+
+                    {%if licencaxpad %}
+                    <tr>
+                        <th>Licença do X-PAD</th>
+                    </tr>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Licença</th>
+                        <th>Editar</th>
+                        <th>Deletar</th>
+                    </tr>
+                    {%for meta in licencaxpad%}
+                    <tr>
+                        <td><a href="{% url 'metauser' meta.id%}">{{meta.cliente}}</a></td>
+                        {%if meta.licença and meta.licença != 'nan'  %}
+                        <td>{{meta.licença}}</td>
+                        {%else%}
+                        <td>Não Informado</td>
+                        {%endif%}
+                        <td><a href="{% url 'EditarLicencaXpad' meta.id %}">Editar</a></td>
+                        <td><a href="{% url 'deletarlicencaxpad' meta.id %}">Deletar</a></td>
+                    </tr>
+                    {%endfor%}
+                    {%endif%}
+
+
+
+
+                    
+                    {%if Licençasurvx %}
+                    <tr>
+                        <th>Licença do SurvX</th>
+                    </tr>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Licença</th>
+                        <th>Transferência ID</th>
+                        <th>Nº Equipamento</th>
+                        <th>Número de Série</th>
+                        <th>Editar</th>
+                        <th>Deletar</th>
+                    </tr>
+                    {%for meta in Licençasurvx%}
+                    <tr>
+                        <td><a href="{% url 'metauser' meta.id%}">{{meta.cliente}}</a></td>
+                        {%if meta.licença and meta.licença != 'nan'  %}
+                        <td>{{meta.licença}}</td>
+                        {%else%}
+                        <td>Não Informado</td>
+                        {%endif%}
+                        {%if meta.Transfer_ID and meta.Transfer_ID != 'nan'  %}
+                        <td>{{meta.Transfer_ID}}</td>
+                        {%else%}
+                        <td>Não Informado</td>
+                        {%endif%}
+                        {%if meta.Equipamento_Number and meta.Equipamento_Number != 'nan' %}
+                        <td>{{meta.Equipamento_Number}}</td>
+                        {%else%}
+                        <td>Não Informado</td>
+                        {%endif%}
+                        {%if meta.Serial_Number and meta.Serial_Number != 'nan'  %}
+                        <td>{{meta.Serial_Number}}</td>
+                        {%else%}
+                        <td>Não Informado</td>
+                        {%endif%}
+                        <td><a href="{% url 'EditarLicencaSurvx' meta.id %}">Editar</a></td>
+                        <td><a href="{% url 'deletarlicencaSurvX' meta.id %}">Deletar</a></td>
+                    </tr>
+                    {%endfor%}
+                    {%endif%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</div>
+{%endblock%}
+<script type="text/javascript" src="static/materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="{% static 'materialize/js/materialize.min.js'%}"></script>

@@ -1,0 +1,323 @@
+body{
+    margin: 0%;
+}
+#nav_create_models{
+    display: flex;
+    justify-content: center;
+}
+.nav_create_models{
+    font-size: large;
+    text-transform: capitalize;
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+
+}
+.nav_create_models > a{
+    color: white;
+    border-bottom: 1px solid yellow;
+    font-size: 1.5rem;
+    text-transform: capitalize;
+    transition: 1s;
+}
+
+.nav_create_models>a:hover{
+    color: black;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    background-color: yellow;
+    border-radius: 10px;
+    border-bottom: 0px  ;
+    transition: 1.5s;
+    border: 0.2rem solid white;
+    font-weight: 600;
+}
+
+.nav_search{
+    display: flex;
+    width: 100%;
+    height: 3rem;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+}
+
+
+.nav_search > form{
+    display: flex;
+    width: 50%;
+    height: 100%;
+}
+
+
+.opcao-adicionais{
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+}
+.opcao-adicionais >a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: max-content;
+    font-size: 1rem;
+    transition: 1s;
+}
+.buttons_header_row1:hover{
+    font-size: 1rem;
+}
+.buttons_header_row1:hover{
+    background-color: yellow;
+    transition: 1s;
+    color: black;
+    font-weight: 600;
+    font-size: 1.2rem;
+    border-radius: 0px 0px 15px 10px;
+    text-decoration: underline;
+    text-transform: capitalize;
+}
+.opcao-adicionais >a:hover{
+    padding: 1rem;
+    background-color: yellow;
+    transition: 1s;
+    color: black;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+
+.input-field{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    justify-content: space-around;
+}
+
+#navegar_base{
+    gap: 3rem;
+}
+.input-field>input{
+    display: flex;
+    width: 40%;
+    height: 100%;
+    color: black;
+    border-radius: 5px;
+    border: solid yellow 1px;
+    text-align: center;
+    font: 900;
+    font-size: 20px;
+}
+
+
+.input-field>button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    height: 100%;
+    font: 900;
+    margin-left: 1rem;
+    border-radius: 1rem;
+    color: yellow;
+    border: solid yellow 1px;
+    background-color: black;
+}
+
+
+.message_div{
+    width: 100%;
+    height: 2%;
+    display: flex;
+    text-transform: capitalize;
+    font-size: 22px;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.info{
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    padding: 1.5rem;
+    display: flex;
+    color: black;
+    text-transform: capitalize;
+    font-size: 22px;
+    background-color: rgba(255, 0, 0, 0.507);
+    border-radius: 1rem;
+}
+
+
+.div-mobile{
+    display:none;
+    width: max-content;
+    height: max-content;
+    align-items: flex-start;
+    flex-direction: column;
+    position: relative;
+    padding-top: 2rem;
+}
+.det-mobile{
+    width: 8rem;
+    display: flex;
+    font-size: 1rem;
+    align-items: center;
+    justify-content:center ;
+    border-radius: 1rem;
+    z-index: 3;
+}
+
+
+.det-mobile > .summary_mobile{
+    color: white;
+    width: 100%;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    border-radius: 1rem;
+    position: relative;
+    border: 1px solid white;
+    margin-bottom: 15px;
+    z-index: 3;
+}
+
+.det-mobile > .summary_mobile:hover{
+    color: yellow;
+    border: yellow 1px solid;
+}
+.det-mobile > .a_mobile:hover{
+    color: yellow;
+    border: yellow 4px double;
+    transition: 0.6s;
+}
+
+.det-mobile>.a_mobile{
+    display: flex;
+    width: 100%;
+    height: max-content;
+    color:white;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    border-radius: 1rem;
+    margin-top: 0.5rem;
+    border:4px double white;
+    font-size: small;
+    position: sticky;
+    z-index: 3;
+    transition: 1s;
+}
+
+
+.success{
+    width: 100%;
+    height: 100%;
+    text-transform: capitalize;
+    font-size: 22px;
+    padding: 1.5rem;
+    display: flex;
+    color: black;
+    background-color: rgba(4, 153, 4, 0.63);
+    border-radius: 1rem;
+}
+
+
+.main-base{
+    padding-bottom: 12rem;
+}
+
+.det-opc-add{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction:column;
+    font-size: 1rem;
+    border-radius: 1rem;
+    z-index: 2;
+    padding-bottom:1rem;
+    transition: 1s;
+}
+.det-opc-add[open]{
+    animation: sweep 1.5s ease-in-out;
+}
+@keyframes sweep {
+    0%    {opacity: 0; margin-left: -40px}
+    100%  {opacity: 1; margin-left: 0px}
+  }
+.det-opc-add >.div-op-add> .a-op-add{
+    width: max-content;
+    text-align: center;
+    color: white;
+    border-bottom: 1px solid yellow;
+    border-top: 1px solid yellow;
+    border-radius: 1rem;
+    padding: 0rem 1.5rem 0rem 1.5rem;
+    margin-top: 1rem;
+    transition: 1s;
+}
+.det-opc-add > .div-op-add>.a-op-add:hover{
+    color: yellow;
+    border-bottom: 1px solid white;
+    border-top: 2px solid white;
+    font-size: 0.9rem;
+    box-shadow:  0px 0px 50px 0px #606062;
+    transition: 0.6s;
+}
+.div-op-add{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.summary-op-add{
+    width: 100%;
+    padding-left: 2rem;
+}
+.summary-op-add:hover{
+    color: yellow;
+}
+
+@media (max-width:1000px) {
+    .div-mobile{
+        display:flex;
+        position: relative;
+    }
+    .opcao-adicionais{
+        display: none;
+    }
+    .nav_create_models{ 
+        display: flex;
+        justify-content: flex-end;
+        gap:3.5rem;
+        width: 100%;
+        font-size: larger;
+    }
+    .det-opc-add{
+        margin-top: 1rem;}
+}
+
+@media (max-width:800px) {
+    .nav_op_criars{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .nav_create_models{ 
+        display: flex;
+        width: max-content;
+        gap: 5rem;
+    }
+    .nav_create_models>a{ 
+        width: 20%;
+        position: relative;
+    }
+    .nav-extended{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+}

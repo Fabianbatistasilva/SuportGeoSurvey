@@ -1,0 +1,85 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block header%}<link rel="stylesheet" href="{% static 'css/ocorrenciauser.css'%}">{%endblock header%}
+{%block 'conteudo'%}
+<div class="row">
+    <div class="col s12 m4 l3">
+        <div class="ocorrencia-aberta">
+            <div><h5>Ocorrência Abertas</h5></div>
+            <hr>
+            {%for ocorrenciasaberta in ocorrencias_aberta%}
+            <a href="{% url 'ocorrenciauser' ocorrenciasaberta.id %}">{{ocorrenciasaberta.cliente}} | {{ocorrenciasaberta.tipo}}</a>
+            {%endfor%}
+        </div>
+    </div>
+    <div class="col s12 m8 l9">
+        <div class="w3-responsive">
+            <div class="label_user">
+                <h4 for="">{{ocorrencia.tipo}}</h4>
+                <div class="div_valores_ocorrencia">
+                    <h6 for="">Cliente:{{ocorrencia.cliente}}</h6>
+                    <h6 for="">Equipamento: {{ocorrencia.equipamento}}</h6>
+                    {% if ocorrencia.status%}
+                    <h6 class="ocorrencia_disp">Status: {{ocorrencia.status}}</h6>
+                    {%endif%}
+                    {%if ocorrencia.file %}
+                    <h6>Arquivos:</h6>
+                    <a href="{{ocorrencia.file.url}}"  download>{{ocorrencia.file}}</a>
+                    {%endif%}
+                    {%if ocorrencia.compra %}
+                    <h6 for="">Compra: {{ocorrencia.compra}}</h6>
+                    {%else%}
+                    <h6 for="">Compra: Não informada</h6>
+                    {%endif%}
+                    {%if ocorrencia.garantia %}
+                    <h6 for="">Garantia: {{ocorrencia.garantia}}</h6>
+                    {%else%}
+                    <h6 for="">Garantia: Não informada</h6>
+                    {%endif%}
+                    <h6 for="">Criada: {{ocorrencia.created}}</h6>
+                </div>
+                <hr>
+                <div class="text-ocorrencia">
+                    <h5>Descrição</h5> 
+                    <label>{{ocorrencia.descricao}}</label>
+                </div>
+                <br>
+                <div class="opcoes_ocorrenciauser">
+                    <span>
+                        <div>
+                            <a class="waves-effect waves-light btn black" href="{% url 'acrecentoAtender' ocorrencia.id%}"><i class="material-icons right">insert_comment
+                            </i>Acrescentar</a>
+                        </div>
+                        <div>
+                            {%if ocorrencia.status == 'Aberto' %}
+                            <form action="{% url 'finalizarocorrencia' ocorrencia.id %}" method="post">{% csrf_token %}
+                                <button class="waves-effect waves-light btn black"><i class="material-icons right">beenhere
+                                        </i>Finalizar</button>
+                            </form>
+                            {%endif%}
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div> 
+        <div class="cont-comentarios">
+            <h5>Comentarios</h5>
+            {%if atualizacao %}
+            {% for comentario  in atualizacao %}
+            <div class="texto-comentario">
+                <p>{{comentario.created}}</p>
+                <label for="">{{comentario.descricao}}</label>
+                {%if comentario.file%}
+                <a style="color: black;" href="{{comentario.file.url}}"  download>File: {{comentario.file}}</a>
+                {%endif%}
+            </div>
+            {% endfor %}
+            {%else%}
+                <h6>Não Existe Comentário</h6>
+            {%endif%}
+        </div>         
+    </div>
+</div>
+{%endblock%}
+<script type="text/javascript" src="static/materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="{% static 'materialize/js/materialize.min.js'%}"></script>

@@ -1,0 +1,48 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block header%}<link rel="stylesheet" href="{% static 'css/pesquisabase.css'%}">{%endblock header%}
+{%block 'conteudo'%}
+<div class="body_date_resultado">
+    <div class="cont_date">
+        {%if pesquisaocorrencia%}
+        <h5>Ocorrencia</h5>
+        <table>
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Tipo</th>
+                    <th>Equipamento</th>
+                    <th>Status</th>
+                    <th>Editar</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for ocorrencia in pesquisaocorrencia%}
+                <tr>
+                    <td><a href="{% url 'ocorrenciauser' ocorrencia.id %}">{{ocorrencia.tipo}}</a></td>
+                    <td>{{ocorrencia.cliente}}</td>
+                    <td>{{ocorrencia.equipamento}}</td>
+                    {% if ocorrencia.status == 'Aberto' %}
+                    <td class="ocorrencia_disp">{{ocorrencia.status}}</td>
+                    <td><a href="{% url 'finalizarocorrencia' ocorrencia.id %}">Finalizar</a></td>
+                    {%else%}
+                    <td class="ocorrencia_concluido">Finalizado</td>
+                    <td><a href="{% url 'abrirocorrencia' ocorrencia.id %}">Abrir</a></td>
+                    {%endif%}
+                    <td><a href="{% url 'deletecorrencia' ocorrencia.id %}">Deletar</a></td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        {%else%}
+        <div class="nonepesquisa">
+            <h2 for="">Pesquisa não existe</h2>
+            <a href="{% url 'home'%}">Voltar para Home</a>
+        </div>
+        {%endif%}
+    </div>
+</div>
+{%endblock%}
+<script type="text/javascript" src="static/materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="{% static 'materialize/js/materialize.min.js'%}"></script>
