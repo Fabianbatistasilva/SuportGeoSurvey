@@ -15,7 +15,7 @@
         </div>
         <form method="post" action="{% url 'editproduto' produto.id %}">{% csrf_token %}
             <h6 for="">Editando Produto</h6>
-            <input type="text" value="{{produto.name}}" name="nome" id="">
+            <input required type="text" value="{{produto.name}}" name="nome" id="">
             <h6 for="">Tipo</h6>
             <select  name="tipoproduto" id="" class="browser-default">
                 {%for tipo in tiposproduto%}

@@ -28,7 +28,7 @@
                 </div>
                 <span>
                     <h6 for="">Cliente</h6>
-                    <input list="clientelist" type="text" placeholder="Adicione o Cliente" name="cliente" id="">
+                    <input required list="clientelist" type="text" placeholder="Adicione o Cliente" name="cliente" id="">
                     <datalist id="clientelist">
                         {% for cliente in clientes %}
                         <option value="{{cliente.nome}}">

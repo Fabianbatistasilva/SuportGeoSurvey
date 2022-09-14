@@ -24,7 +24,7 @@
         </div>
         <form method="post" action="{% url 'editcliente' cliente.id %}">{% csrf_token %}
             <h6 for="">Cliente</h6>
-            <input type="text" value="{{cliente.nome}}" name="nome" id="">
+            <input required type="text" value="{{cliente.nome}}" name="nome" id="">
             <h6 for="">Tipo</h6>
             <select name="tipo" id="" class="browser-default">
                 <option value="F">PF</option>
