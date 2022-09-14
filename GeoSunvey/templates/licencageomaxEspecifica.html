@@ -3,38 +3,38 @@
 {% block 'conteudo' %}
 <div class="body_licencaEspecifica">
     <div class="conteudolicencaEspecifica">
-        <h4 for="">Licença do GeoMax do {{licençaserie.cliente}}</h4>
-        {%if licençaserie.descriçao and licençaserie.descriçao != 'nan'  %}
-        <h6>Descrição: <strong>{{licençaserie.descriçao}}</strong></h6>
+        <h4 for="">Licença do GeoMax do {{licençageomax.cliente}}</h4>
+        {%if licençageomax.descriçao and licençageomax.descriçao != 'nan'  %}
+        <h6>Descrição: <strong>{{licençageomax.descriçao}}</strong></h6>
         {%else%}
         <h6>Descrição:  <strong>Não Informado</strong></h6>
         {%endif%}
 
-        {%if licençaserie.situacao and licençaserie.situacao != 'nan'  %}
-        <h6>Situacão: <strong>{{licençaserie.situacao}}</strong></h6>
+        {%if licençageomax.situacao and licençageomax.situacao != 'nan'  %}
+        <h6>Situacão: <strong>{{licençageomax.situacao}}</strong></h6>
         {%else%}
         <h6>Situacão:  <strong>Não Informado</strong></h6>
         {%endif%}
 
         
-        {%if licençaserie.cidade and licençaserie.cidade != 'nan'  %}
-        <h6>Cidade: <strong>{{licençaserie.cidade}}</strong></h6>
+        {%if licençageomax.cidade and licençageomax.cidade != 'nan'  %}
+        <h6>Cidade: <strong>{{licençageomax.cidade}}</strong></h6>
         {%else%}
         <h6>Cidade:  <strong>Não Informado</strong></h6>
         {%endif%}
 
-        {%if licençaserie.Equipamento_Number and licençaserie.Equipamento_Number != 'nan'  %}
-        <h6>Nº Do Equipamento: <strong>{{licençaserie.Equipamento_Number}}</strong></h6>
+        {%if licençageomax.Equipamento_Number and licençageomax.Equipamento_Number != 'nan'  %}
+        <h6>Nº Do Equipamento: <strong>{{licençageomax.Equipamento_Number}}</strong></h6>
         {%else%}
         <h6>Nº Do Equipamento:  <strong>Não Informado</strong></h6>
         {%endif%}
 
-        {%if licençaserie.Serial_Number and licençaserie.Serial_Number != 'nan'  %}
-        <h6>Número de Série: <strong>{{licençaserie.Serial_Number}}</strong></h6>
+        {%if licençageomax.Serial_Number and licençageomax.Serial_Number != 'nan'  %}
+        <h6>Número de Série: <strong>{{licençageomax.Serial_Number}}</strong></h6>
         {%else%}
         <h6>Número de Série: <strong>Não Informado</strong></h6>
         {%endif%}
-        
+        <span class="span_Especifico"><a class="button_editar_especifico" href="{% url 'LicençaGeoMaxEditar' licençageomax.id %}">Editar</a> <a class="button_deleta_especifico" href="{% url 'deletarLicencageomax' licençageomax.id %}">Deletar</a></span>
     </div>
 </div>
 {% endblock  %}

@@ -3,31 +3,32 @@
 {% block 'conteudo' %}
 <div class="body_licencaEspecifica">
     <div class="conteudolicencaEspecifica">
-        <h4 for="">Licença do SurvX do {{licençaserie.cliente}}</h4>
+        <h4 for="">Licença do SurvX do {{licenca.cliente}}</h4>
 
-        {%if licençaserie.licença and licençaserie.licença != 'nan'  %}
-        <h6>Licença: <strong>{{licençaserie.licença}}</strong></h6>
+        {%if licenca.licença and licenca.licença != 'nan'  %}
+        <h6>Licença: <strong>{{licenca.licença}}</strong></h6>
         {%else%}
         <h6>Licença:  <strong>Não Informado</strong></h6>
         {%endif%}
 
-        {%if licençaserie.Transfer_ID and licençaserie.Transfer_ID != 'nan'  %}
-        <h6>Transfer ID: <strong>{{licençaserie.Transfer_ID}}</strong></h6>
+        {%if licenca.Transfer_ID and licenca.Transfer_ID != 'nan'  %}
+        <h6>Transfer ID: <strong>{{licenca.Transfer_ID}}</strong></h6>
         {%else%}
         <h6>Transfer ID:  <strong>Não Informado</strong></h6>
         {%endif%}
 
-        {%if licençaserie.Equipamento_Number and licençaserie.Equipamento_Number != 'nan'  %}
-        <h6>Modelo: <strong>{{licençaserie.Equipamento_Number}}</strong></h6>
+        {%if licenca.Equipamento_Number and licenca.Equipamento_Number != 'nan'  %}
+        <h6>Equipamento Number: <strong>{{licenca.Equipamento_Number}}</strong></h6>
         {%else%}
-        <h6>Modelo:  <strong>Não Informado</strong></h6>
+        <h6>Equipamento Number:  <strong>Não Informado</strong></h6>
         {%endif%}
 
-        {%if licençaserie.Serial_Number and licençaserie.Serial_Number != 'nan'  %}
-        <h6>Serial Number: <strong>{{licençaserie.Serial_Number}}</strong></h6>
+        {%if licenca.Serial_Number and licenca.Serial_Number != 'nan'  %}
+        <h6>Serial Number: <strong>{{licenca.Serial_Number}}</strong></h6>
         {%else%}
         <h6>Serial Number:  <strong>Não Informado</strong></h6>
         {%endif%}
+        <span class="span_Especifico"><a class="button_editar_especifico" href="{% url 'EditarLicencaSurvx' licenca.id %}">Editar</a> <a class="button_deleta_especifico" href="{% url 'deletarlicencaSurvX' licenca.id %}">Deletar</a></span>
     </div>
 </div>
 {% endblock  %}

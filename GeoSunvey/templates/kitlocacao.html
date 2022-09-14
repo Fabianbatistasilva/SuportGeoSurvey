@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{% static 'css/licencas.css'%}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="static/materialize/css/materialize.min.css"  media="screen,projection"/>
-    <title>{%block 'title'%}Licença de GeoMax{%endblock%}</title>
+    <title>{%block 'title'%}Kit de locação{%endblock%}</title>
 </head>
 {%block 'conteudo'%}
 <div class="body_licencas">
@@ -24,67 +24,66 @@
             {% endif %}           
         </div>
         <div class="row-cliente-1">
-            <h1>Licença do GeoMax</h1>
+            <h1>kit de locação</h1>
         </div>
         {%if quanti_licenca %}
-        <h6>Existem {{quanti_licenca}} licença do GeoMax</h6>
-        <a href="{% url 'createlicencageomax'%}">Criar licença do GeoMax</a>
+        <h6>Existem {{quanti_licenca}} kit de locação</h6>
+        <a href="{% url 'createkitlocacao'%}">Criar kit de locação</a>
         {%else%}
-        <h6>Não Existem licença do GeoMax</h6>
-        <a href="{% url 'createlicencageomax'%}">Criar licença do GeoMax</a>
+        <h6>Não Existem licença do Aplitop</h6>
+        <a href="{% url 'createkitlocacao'%}">Criar kit de locação</a>
         {%endif%}
-        {%if licençageomax%}
+        {%if licenca %}
         <table>
             <thead>
+                {%if licenca %}
                 <tr>
-                    <th>Cliente</th>
-                    <th>Nº Equipamento</th>
-                    <th>Número de Série</th>
-                    <th>Status</th>
-                    <th>Editar</th>
-                    <th>Deletar</th>
+                    <th>kit de locação/th>
                 </tr>
-            <thead>
-            <tbody>
-                {%if licençageomax %}                </tr>
-                    {%for meta in licençageomax%}
-                    <tr>
-                    <td><a href="{% url 'LicençaGeoMaxEspecifica' meta.id %}">{{meta.cliente}}</a></td>
-                    {%if meta.Equipamento_Number and meta.Equipamento_Number != 'nan'  %}
-                    <td>{{meta.Equipamento_Number}}</td>
+                <tr>
+                    <th>Modelo</th>
+                    <th>Modelo coletora</th>
+                    <th>Aplicativo</th>
+                    <th>Número do Kit</th>
+                </tr>
+                {%for meta in licenca%}
+                <tr>
+                    <td><a href="{% url 'kitlocacaoEspecifica' meta.id%}">{{meta.modelo}}</a></td>
+                    {%if meta.modelo_coletora and meta.modelo_coletora != 'nan'  %}
+                    <td>{{meta.modelo_coletora}}</td>
                     {%else%}
                     <td>Não Informado</td>
                     {%endif%}
-                    {%if meta.Serial_Number and meta.Serial_Number != 'nan' %}
-                    <td>{{meta.Serial_Number}}</td>
+                    {%if meta.Aplicativo and meta.Aplicativo != 'nan'  %}
+                    <td>{{meta.Aplicativo}}</td>
                     {%else%}
                     <td>Não Informado</td>
                     {%endif%}
-                    {%if meta.situacao and meta.situacao != 'nan' %}
-                    <td>{{meta.situacao}}</td>
+                    {%if meta.Número_do_Kit and meta.Número_do_Kit != 'nan' %}
+                    <td>{{meta.Número_do_Kit}}</td>
                     {%else%}
                     <td>Não Informado</td>
                     {%endif%}
-                    <td><a href="{% url 'LicençaGeoMaxEditar' meta.id %}">Editar</a></td>
-                    <td><a href="{% url 'deletarlicencaserie' meta.id  %}">Deletar</a></td>
+                    <td><a href="{% url 'LicençakitEditar' meta.id %}">Editar</a></td>
+                    <td><a href="{% url 'deletarkit' meta.id  %}">Deletar</a></td>
                 </tr>
                 {%endfor%}
                 {%endif%}
             </tbody>
         </table>
         <div class="pagination">
-            {%if licençageomax%}
+            {%if licenca%}
             <span class="step-links">
-                {% if licençageomax.has_previous %}
-                    <a href="?page={{ licençageomax.previous_page_number }}">Anterior</a>
+                {% if licenca.has_previous %}
+                    <a href="?page={{ licenca.previous_page_number }}">Anterior</a>
                 {% endif %}
         
                 <span class="current">
-                    Página {{ licençageomax.number }} de {{ licençageomax.paginator.num_pages }}.
+                    Página {{ licenca.number }} de {{ licenca.paginator.num_pages }}.
                 </span>
         
-                {% if licençageomax.has_next %}
-                    <a href="?page={{ licençageomax.next_page_number }}">próxima</a>
+                {% if licenca.has_next %}
+                    <a href="?page={{ licenca.next_page_number }}">próxima</a>
                 {% endif %}
             </span>
             {%endif%}  

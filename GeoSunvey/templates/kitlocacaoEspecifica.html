@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block 'conteudo' %}
+<div class="body_licencaEspecifica">
+    <div class="conteudolicencaEspecifica">
+        <h4 for="">Kit de Locação </h4>
+        {%if licenca.modelo and licenca.modelo != 'nan'  %}
+        <h6>Modelo: <strong>{{licenca.modelo}}</strong></h6>
+        {%else%}
+        <h6>Modelo:  <strong>Não Informado</strong></h6>
+        {%endif%}
+
+        {%if licenca.modelo_coletora and licenca.modelo_coletora != 'nan'  %}
+        <h6>Modelo coletora: <strong>{{licenca.modelo_coletora}}</strong></h6>
+        {%else%}
+        <h6>Modelo coletora:  <strong>Não Informado</strong></h6>
+        {%endif%}
+
+        
+        {%if licenca.Serial_Number_rover and licenca.Serial_Number_rover != 'nan'  %}
+        <h6>Serial Number rover: <strong>{{licenca.Serial_Number_rover}}</strong></h6>
+        {%else%}
+        <h6>Serial Number rover:  <strong>Não Informado</strong></h6>
+        {%endif%}
+
+        {%if licenca.Serial_Number_coletora and licenca.Serial_Number_coletora != 'nan'  %}
+        <h6>Serial Number coletora: <strong>{{licenca.Serial_Number_coletora}}</strong></h6>
+        {%else%}
+        <h6>Serial Number coletora:  <strong>Não Informado</strong></h6>
+        {%endif%}
+
+        {%if licenca.Serial_Number and licenca.Serial_Number != 'nan'  %}
+        <h6>Número de Série: <strong>{{licenca.Serial_Number}}</strong></h6>
+        {%else%}
+        <h6>Número de Série: <strong>Não Informado</strong></h6>
+        {%endif%}
+
+        {%if licenca.Aplicativo and licenca.Aplicativo != 'nan'  %}
+        <h6>Aplicativo: <strong>{{licenca.Aplicativo}}</strong></h6>
+        {%else%}
+        <h6>Aplicativo: <strong>Não Informado</strong></h6>
+        {%endif%}
+
+        {%if licenca.Número_do_Kit and licenca.Número_do_Kit != 'nan'  %}
+        <h6>Número do Kit: <strong>{{licenca.Número_do_Kit}}</strong></h6>
+        {%else%}
+        <h6>Número do Kit: <strong>Não Informado</strong></h6>
+        {%endif%}
+
+        {%if licenca.Equipment_ID and licenca.Equipment_ID != 'nan'  %}
+        <h6>Equipment ID: <strong>{{licenca.Equipment_ID}}</strong></h6>
+        {%else%}
+        <h6>Equipment ID: <strong>Não Informado</strong></h6>
+        {%endif%}
+
+        <span class="span_Especifico"><a class="button_editar_especifico" href="{% url 'LicençakitEditar' licenca.id %}">Editar</a> <a class="button_deleta_especifico" href="{% url 'deletarkit' licenca.id %}">Deletar</a></span>
+    </div>
+</div>
+{% endblock  %}

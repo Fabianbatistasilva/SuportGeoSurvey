@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block 'conteudo' %}
+<div class="body_licencaEspecifica">
+    <div class="conteudolicencaEspecifica">
+        <h4 for="">Licença do X-Pad do {{licenca.cliente}}</h4>
+
+        {%if licenca.licença and licenca.licença != 'nan'  %}
+        <h6>Licença: <strong>{{licenca.licença}}</strong></h6>
+        {%else%}
+        <h6>Licença:  <strong>Não Informado</strong></h6>
+        {%endif%}
+
+        {%if licenca.Transfer_ID and licenca.Transfer_ID != 'nan'  %}
+        <h6>Transfer ID: <strong>{{licenca.Transfer_ID}}</strong></h6>
+        {%else%}
+        <h6>Transfer ID:  <strong>Não Informado</strong></h6>
+        {%endif%}
+
+        {%if licenca.Equipamento_Number and licenca.Equipamento_Number != 'nan'  %}
+        <h6>Equipamento Number: <strong>{{licenca.Equipamento_Number}}</strong></h6>
+        {%else%}
+        <h6>Equipamento Number:  <strong>Não Informado</strong></h6>
+        {%endif%}
+
+        {%if licenca.modelo and licenca.modelo != 'nan'  %}
+        <h6> Modelo: <strong>{{licenca.modelo}}</strong></h6>
+        {%else%}
+        <h6>Modelo:  <strong>Não Informado</strong></h6>
+        {%endif%}
+
+
+        {%if licenca.Serial_Number and licenca.Serial_Number != 'nan'  %}
+        <h6>Serial Number: <strong>{{licenca.Serial_Number}}</strong></h6>
+        {%else%}
+        <h6>Serial Number:  <strong>Não Informado</strong></h6>
+        {%endif%}
+
+        {%if licenca.situacao and licenca.situacao != 'nan'  %}
+        <h6>Situacao: <strong>{{licenca.situacao}}</strong></h6>
+        {%else%}
+        <h6>Situacao:  <strong>Não Informado</strong></h6>
+        {%endif%}
+
+        {%if licenca.descriçao and licenca.descriçao != 'nan'  %}
+        <h6>Descrição: <strong>{{licenca.descriçao}}</strong></h6>
+        {%else%}
+        <h6>Descrição:  <strong>Não Informado</strong></h6>
+        {%endif%}
+
+        {%if licenca.data_de_entrega and licenca.data_de_entrega != 'nan'  %}
+        <h6>Data de entrega: <strong>{{licenca.data_de_entrega}}</strong></h6>
+        {%else%}
+        <h6>Data de entrega:  <strong>Não Informado</strong></h6>
+        {%endif%}
+
+        <span class="span_Especifico"><a class="button_editar_especifico" href="{% url 'EditarLicencaXpad' licenca.id %}">Editar</a> <a class="button_deleta_especifico" href="{% url 'deletarlicencaxpad' licenca.id %}">Deletar</a></span>
+    </div>
+</div>
+{% endblock  %}

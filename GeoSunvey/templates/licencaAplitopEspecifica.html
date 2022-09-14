@@ -3,30 +3,31 @@
 {% block 'conteudo' %}
 <div class="body_licencaEspecifica">
     <div class="conteudolicencaEspecifica">
-        <h4 for="">Licença do Aplitop do {{licençaserie.cliente}}</h4>
-        {%if licençaserie.licença and licençaserie.licença != 'nan'  %}
-        <h6>Licença: <strong>{{licençaserie.licença}}</strong></h6>
+        <h4 for="">Licença do Aplitop do {{licença.cliente}}</h4>
+        {%if licença.licença and licença.licença != 'nan'  %}
+        <h6>Licença: <strong>{{licença.licença}}</strong></h6>
         {%else%}
         <h6>Licença:  <strong>Não Informado</strong></h6>
         {%endif%}
 
-        {%if licençaserie.data_de_ativacao and licençaserie.data_de_ativacao != 'nan'  %}
-        <h6>Data de ativacao: <strong>{{licençaserie.data_de_ativacao}}</strong></h6>
+        {%if licença.data_de_ativacao and licença.data_de_ativacao != 'nan'  %}
+        <h6>Data de ativacao: <strong>{{licença.data_de_ativacao}}</strong></h6>
         {%else%}
         <h6>Data de ativacao: <strong>Não Informado</strong></h6>
         {%endif%}
 
-        {%if licençaserie.status and licençaserie.status != 'nan'  %}
-        <h6>Status: <strong>{{licençaserie.status}}</strong></h6>
+        {%if licença.status and licença.status != 'nan'  %}
+        <h6>Status: <strong>{{licença.status}}</strong></h6>
         {%else%}
         <h6>Status:  <strong>Não Informado</strong></h6>
         {%endif%}
 
-        {%if licençaserie.Serial_Number and licençaserie.Serial_Number != 'nan'  %}
-        <h6>Serial Number: <strong>{{licençaserie.Serial_Number}}</strong></h6>
+        {%if licença.Serial_Number and licença.Serial_Number != 'nan'  %}
+        <h6>Serial Number: <strong>{{licença.Serial_Number}}</strong></h6>
         {%else%}
         <h6>Serial Number:  <strong>Não Informado</strong></h6>
         {%endif%}
+        <span class="span_Especifico"><a class="button_editar_especifico" href="{% url 'EditarLicencaAplitop' licença.id %}">Editar</a> <a class="button_deleta_especifico" href="{% url 'deletarlicencaaplitop' licença.id %}">Deletar</a></span>
     </div>
 </div>
 {% endblock  %}

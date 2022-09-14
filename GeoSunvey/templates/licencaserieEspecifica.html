@@ -9,6 +9,7 @@
         <h6>Produto: <strong>{{licençaserie.Produto}}</strong> </h6>
         <h6>Número de Série: <strong>{{licençaserie.numerodeSerie}}</strong> </h6>
         <h6>Observações: <strong>{{licençaserie.Observaçoes}}</strong></h6>
+        <span class="span_Especifico"><a class="button_editar_especifico" href="{% url 'LicençadeSerieEditar' licençaserie.id %}">Editar</a> <a class="button_deleta_especifico" href="{% url 'deletarlicencaserie' licençaserie.id %}">Deletar</a></span>
     </div>
 </div>
 {% endblock  %}

@@ -16,15 +16,6 @@
         <br>
         <div class="row-cliente-1">
             <h1>Licença de Série</h1>
-            <form action="{% url 'pesquisacliente'%}" method="get">{% csrf_token %}
-                <input list="clientelist" placeholder="Pesquise as Licença de Série" class="js-tooltip" type="search" name="searchcliente" id="">
-                <datalist id="clientelist">
-                    {%for licenca in licençaserie %}
-                    <option value="{{licenca}}">
-                    {%endfor%}
-                </datalist>a
-                <button class="btn btn-primary black js-tooltip" type="submit"><span>Pesquisa</span></button>
-            </form>
         </div>
         {%if quanti_licenca %}
         <h6>Existem {{quanti_licenca}} licença de série</h6>

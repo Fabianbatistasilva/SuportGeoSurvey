@@ -57,14 +57,17 @@ urlpatterns = [
 
 
     #licença de XPAD
-    path('licençasXPAD/',views.licenças,name='licençasXPAD'),
+    path('licençasXPAD/',views.licencaxpad,name='licençasXPAD'),
+    path('licençasXPADEspecifica/<int:id>/',views.licencaxpadEspecifica,name='licençasXPADEspecifica'),
     path('deletarlicencaxpad/<int:id>/',views.deletarlicencaxpad,name='deletarlicencaxpad'),
     path('LicençaXPADEditar/<int:id>/',views.EditarLicencaXpad,name='EditarLicencaXpad'),
-    path('createXpad/',views.createlicençasSerie,name='createxpad'),
+    path('createXpad/',views.createlicençasXPAD,name='createxpad'),
 
 
     #licença de SURVX
-    path('licençasSURVX/',views.licenças,name='licençasSURVX'),
+    path('licençasSURVX/',views.licencasurvx,name='licençasSurvX'),
+    path('LicençaSurvXEspecifica/<int:id>/',views.licençasSurvXEspecifica,name='LicençaSurvXEspecifica'),
+    path('CreatelicençasSURVX/',views.createlicençasSurvX,name='CreatelicencasSURVX'),
     path('LicençaSurvXEditar/<int:id>/',views.EditarLicencaSurvx,name='EditarLicencaSurvx'),
     path('deletarlicencaSurvx/<int:id>/',views.deletarlicencaSurvX,name='deletarlicencaSurvX'),
 
@@ -94,7 +97,9 @@ urlpatterns = [
 
     
     #licença kits de locação
-    path('kitlocacao/',views.licenças,name='kitlocacao'),
+    path('kitlocacao/',views.kitlocacao,name='kitlocacao'),
+    path('kitlocacaoEspecifica/<int:id>/',views.kitlocacaoEspecifica,name='kitlocacaoEspecifica'),
+    path('createkitlocacao/',views.createkitlocacao,name='createkitlocacao'),
     path('LicençakitEditar/<int:id>/',views.EditarLicencakit,name='LicençakitEditar'),
     path('deletarkit/<int:id>/',views.deletarkit,name='deletarkit'),
 ]

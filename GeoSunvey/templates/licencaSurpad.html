@@ -3,7 +3,9 @@
 {%block 'conteudo'%}
 <div class="body_licencas">
     <div class="Cont-serie">
-        <h1>Licença do SurPad</h1>
+        <div class="row-cliente-1">
+            <h1>Licença do SurPad</h1>
+        </div>
         {%if quanti_licenca %}
         <h6>Existem {{quanti_licenca}} licença SurPad</h6>
         <a href="{% url 'createlicençasSurpad'%}">Criar licença SurPad</a>

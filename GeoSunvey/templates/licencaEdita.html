@@ -4,6 +4,16 @@
 <div class="body_edit_licenca">
     <div class="cont_edit_licenca">
         <h1>Editar Licença</h1>
+        {% if messages %}
+        <br>
+        <div class="message_div">
+            <div class="messages">
+              {% for message in messages %}
+              <h6 {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h6>
+              {% endfor %}
+            </div>         
+        </div>
+        {% endif %}  
         <form action="" method="post"> {% csrf_token %}
             {% if licenca.cliente %}
             <div class="div_dados">
@@ -12,7 +22,7 @@
                 {%else%}
                 <h6 for="">Cliente atual: Não informado</h6>
                 {%endif%}
-                <input list="clientelist" placeholder="Altere o nome do cliente da licença" type="text" name="cliente" id="">
+                <input list="clientelist" value="" placeholder="Altere o nome do cliente da licença" type="text" name="cliente" id="">
                 <datalist id='clientelist'>
                     
                     {% for cliente in clientes %}
@@ -29,7 +39,7 @@
                     {%else%}
                     <h6 for="">Situacao: Não informado</h6>
                     {%endif%}
-                    <input placeholder="Altere a situacao da licença" type="text" name="situacao" id="">
+                    <input value="{{licenca.situacao}}" placeholder="Altere a situacao da licença" type="text" name="situacao" id="">
                 </div>
             {% endif %}
 
@@ -51,28 +61,28 @@
                     {%else%}
                     <h6 for="">Licença: Não informado</h6>
                     {%endif%}
-                    <input placeholder="Altere a licença " type="text" name="licença" id="">
+                    <input value="{{licenca.licença}}" placeholder="Altere a licença " type="text" name="licença" id="">
                 </div>
             {% endif %}
 
             {% if licenca.data_de_ativacao %}
                 <div class="div_dados">
                     <h6>Data de ativacao: {{licenca.data_de_ativacao}}</h6>
-                    <input placeholder="Altere a Data de ativacao " type="text" name="data_de_ativacao" id="">
+                    <input value="{{licenca.data_de_ativacao}}" placeholder="Altere a Data de ativacao " type="text" name="data_de_ativacao" id="">
                 </div>
             {% endif %}
 
             {% if licenca.data_de_entrega %}
                 <div class="div_dados">
                     <h6>Status: {{licenca.data_de_entrega}}</h6>
-                    <input placeholder="Altere o status " type="datetime" name="status" id="">
+                    <input value="{{licenca.data_de_entrega}}" placeholder="Altere o status " type="datetime" name="status" id="">
                 </div>
             {% endif %}
 
             {% if licenca.status %}
                 <div class="div_dados">
                     <h6>Status: {{licenca.status}}</h6>
-                    <input placeholder="Altere o status " type="text" name="status" id="">
+                    <input value="{{licenca.status}}" placeholder="Altere o status " type="text" name="status" id="">
                 </div>
             {% endif %}
 
@@ -84,7 +94,7 @@
                     <h6 for="">Modelo atual: Não informado</h6>
                     
                     {%endif%}
-                    <input placeholder="Altere o modelo da licença" type="text" name="modelo" id="">
+                    <input value="{{licenca.modelo}}" placeholder="Altere o modelo da licença" type="text" name="modelo" id="">
                 </div>
             {% endif %}
             
@@ -95,7 +105,7 @@
                     {%else%}
                     <h6 for="">Empresa atual: Não informado</h6>
                     {%endif%}
-                    <input placeholder="Altere a empresa da licença" type="text" name="empresa" id="">
+                    <input value="{{licenca.empresa}}" placeholder="Altere a empresa da licença" type="text" name="empresa" id="">
                 </div>
             {% endif %}
 
@@ -106,7 +116,7 @@
                     {%else%}
                     <h6 for="">Modelo coletora: Não informado</h6>
                     {%endif%}
-                    <input placeholder="Altere o modelo coletora da licença" type="text" name="modelo_coletora" id="">
+                    <input value="licenca.modelo_coletora" placeholder="Altere o modelo coletora da licença" type="text" name="modelo_coletora" id="">
                 </div>
             {% endif %}
             
@@ -117,7 +127,7 @@
                     {%else%}
                     <h6 for="">Equipamento Number: Não informado</h6>
                     {%endif%}
-                    <input placeholder="Altere o Equipamento Number da licença" type="text" name="Equipamento_Number" id="">
+                    <input value="{{licenca.Equipamento_Number}}" placeholder="Altere o Equipamento Number da licença" type="text" name="Equipamento_Number" id="">
                 </div>
             {% endif %}
 
@@ -128,7 +138,7 @@
                     {%else%}
                     <h6 for="">Transfer ID: Não informado</h6>
                     {%endif%}
-                    <input placeholder="Altere o Transfer ID da licença" type="text" name="Transfer_ID" id="">
+                    <input value="{{licenca.Transfer_ID}}" placeholder="Altere o Transfer ID da licença" type="text" name="Transfer_ID" id="">
                 </div>
             {% endif %}
 
@@ -139,7 +149,7 @@
                     {%else%}
                     <h6 for="">Serial Number Base:  Não informado</h6>
                     {%endif%}
-                    <input placeholder="Altere o Serial Number Base da licença" type="text" name="Serial_Number_base" id="">
+                    <input value="{{licenca.Serial_Number_base}}" placeholder="Altere o Serial Number Base da licença" type="text" name="Serial_Number_base" id="">
                 </div>
             {% endif %}
 
@@ -150,7 +160,7 @@
                     {%else%}
                     <h6 for="">Serial Number coletora:  Não informado</h6>
                     {%endif%}
-                    <input placeholder="Altere o Serial Number coletora da licença" type="text" name="Serial_Number_coletora" id="">
+                    <input value="{{licenca.Serial_Number_coletora}}" placeholder="Altere o Serial Number coletora da licença" type="text" name="Serial_Number_coletora" id="">
                 </div>
             {% endif %}
 
@@ -161,7 +171,7 @@
                     {%else%}
                     <h6 for="">Serial Number rover:  Não informado</h6>
                     {%endif%}
-                    <input placeholder="Altere o Serial Number rover da licença" type="text" name="Serial_Number_rover" id="">
+                    <input value="{{licenca.Serial_Number_rover}}" placeholder="Altere o Serial Number rover da licença" type="text" name="Serial_Number_rover" id="">
                 </div>
             {% endif %}
 
@@ -172,7 +182,7 @@
                     {%else%}
                     <h6 for="">Serial Number : não informado</h6>
                     {%endif%}
-                    <input placeholder="Altere o Serial Number  da licença" type="text" name="Serial_Number" id="">
+                    <input value="{{licenca.Serial_Number}}" placeholder="Altere o Serial Number  da licença" type="text" name="Serial_Number" id="">
                 </div>
             {% endif %}
             
@@ -183,7 +193,7 @@
                     {%else%}
                     <h6 for="">Aplicativo : Não informado</h6>
                     {%endif%}
-                    <input placeholder="Altere o Aplicativo  da licença" type="text" name="Aplicativo" id="">
+                    <input value="{{licenca.Aplicativo}}" placeholder="Altere o Aplicativo  da licença" type="text" name="Aplicativo" id="">
                 </div>
             {% endif %}
 
@@ -194,7 +204,7 @@
                     {%else%}
                     <h6 for="">Número do Kit : Não informado</h6>
                     {%endif%}
-                    <input placeholder="Altere o Número do Kit da licença" type="text" name="Número_do_Kit" id="">
+                    <input value="{{licenca.Número_do_Kit}}" placeholder="Altere o Número do Kit da licença" type="text" name="Número_do_Kit" id="">
                 </div>
             {% endif %}
 
@@ -205,7 +215,7 @@
                     {%else%}
                     <h6 for="">Equipment ID: Não informado</h6>
                     {%endif%}
-                    <input placeholder="Altere o Equipment ID da licença" type="text" name="Equipment_ID" id="">
+                    <input value="{{licenca.Equipment_ID}}" placeholder="Altere o Equipment ID da licença" type="text" name="Equipment_ID" id="">
                 </div>
             {% endif %}
 
@@ -216,7 +226,7 @@
                     {%else%}
                     <h6 for="">Cidade atual: Não informado</h6>
                     {%endif%}
-                    <input placeholder="Altere a Cidade da licença" type="text" name="cidade" id="">
+                    <input value="{{licenca.cidade}}" placeholder="Altere a Cidade da licença" type="text" name="cidade" id="">
                 </div>
             {% endif %}
             
@@ -227,7 +237,7 @@
                     {%else%}
                     <h6 for="">Produto atual: Não informado</h6>
                     {%endif%}
-                    <input list="produlist" placeholder="Altere o Produto da licença" type="text" name="Produto" id="">
+                    <input value="" list="produlist" placeholder="Altere o Produto da licença" type="text" name="Produto" id="">
                     <datalist id="produlist">
                         
                         {% for produto in produtos %}
@@ -245,7 +255,7 @@
                     {%else%}
                     <h6 for="">Número de Série atual: Não informado</h6>
                     {%endif%}
-                    <input placeholder="Altere o número de Série da licença" type="text" name="numerodeSerie" id="">
+                    <input value="{{licenca.numerodeSerie}} " placeholder="Altere o número de Série da licença" type="text" name="numerodeSerie" id="">
                 </div>
             {% endif %}   
 
@@ -254,7 +264,7 @@
                     <p>Observaçôes atual: {{licenca.Observaçoes}}</p>
                     <textarea placeholder="Altere o número de Série da licença" name="Observaçoes" id="text_area_editlicenca" cols="30" rows="10"></textarea>
                 </div>
-            {% endif %}  
+            {% endif %} 
             <button class="btn waves-effect grey darken-4" type="submit" name="action">Submit
                 <i class="material-icons right">send</i>
               </button>

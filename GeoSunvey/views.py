@@ -715,12 +715,18 @@ def createlicençasSerie(request):
         Observacao = request.POST.get('Observacao')
         if len(cliente.split())==0:
             messages.add_message(request, messages.INFO, 'Valor invalido.')
-            return render(request,'createlicencasurvx.html',)
+            clientes=Cliente.objects.all()
+            produtos=Produto.objects.all()
+            context={'clientes':clientes,'produtos':produtos}
+            return render(request,'createlicencaserie.html',context)
         cliente = Cliente.objects.filter(nome = cliente)
         produto = Produto.objects.filter(name = produto)
         if len(produto) == 0 or len(cliente) == 0:
             messages.add_message(request, messages.INFO, 'Valores invalido.')
-            return render(request,'createlicencaserie.html',)
+            clientes=Cliente.objects.all()
+            produtos=Produto.objects.all()
+            context={'clientes':clientes,'produtos':produtos}
+            return render(request,'createlicencaserie.html',context)
         add_licenca = LicençadeSerie.objects.create(cliente_id=cliente[0].id,Produto_id=produto[0].id,numerodeSerie=numerodeserie,cidade=cidade,empresa=empresa,Observaçoes = Observacao)
         add_licenca.save()
         return redirect('LicençadeSerie')
@@ -741,15 +747,20 @@ def EditarLicencaSerie(request,id):
         numerodeserie = request.POST.get('numerodeserie')
         Observacao = request.POST.get('Observacao')  
         if len(cliente.split())==0:
-            messages.add_message(request, messages.INFO, 'Valor invalido.')
-            return render(request,'createlicencasurvx.html',)
+            clientes=Cliente.objects.all()
+            produtos=Produto.objects.all()
+            context={'licenca':licenca,'clientes':clientes,'produtos':produtos}
+            return render(request,'licencaEdita.html',context)
         cliente = Cliente.objects.filter(nome = cliente)
         produto = Produto.objects.filter(name = produto)
         if len(produto) == 0 or len(cliente) == 0:
-            messages.add_message(request, messages.INFO, 'Valores invalido.')
-            return render(request,'createlicencaserie.html',)
-        licenca=LicençadeSerie.objects.get(id=id)
+            clientes=Cliente.objects.all()
+            produtos=Produto.objects.all()
+            context={'licenca':licenca,'clientes':clientes,'produtos':produtos}
+            return render(request,'licencaEdita.html',context)
+        licenca=LicençadeSerie.objects.filter(id__exact=id)
         licenca.update(cliente_id=cliente[0].id,Produto_id=produto[0].id,numerodeSerie=numerodeserie,cidade=cidade,empresa=empresa,Observaçoes = Observacao)
+        return redirect('LicençadeSerie')
     try:
         licenca=LicençadeSerie.objects.get(id=id)
     except:
@@ -771,16 +782,16 @@ def deletarlicencaserie(request,id):
     licenca=LicençadeSerie.objects.get(id=id)
     context={'licenca':licenca,}
     return render(request,'deletarlicenca.html',context)
-
+ 
 
 #GeoMax
 
 def licençasgeomax(request):
     if len(request.session.values())<=0:
         return redirect('user_login')
-    licençaserie=LicençaGeoMax.objects.all()
-    quanti_licenca=licençaserie.count()
-    p = Paginator(licençaserie, 10)
+    licençageomax=LicençaGeoMax.objects.all()
+    quanti_licenca=licençageomax.count()
+    p = Paginator(licençageomax, 10)
     try:
         page = int(request.GET.get('page', '1'))
     except ValueError:
@@ -788,20 +799,20 @@ def licençasgeomax(request):
 
     # Se o page request (9999) está fora da lista, mostre a última página.
     try:
-        licençaserie = p.page(page)
+        licençageomax = p.page(page)
     except (EmptyPage, InvalidPage):
-        licençaserie = p.page(p.num_pages)
-    context={'licençaserie':licençaserie,'quanti_licenca':quanti_licenca}
+        licençageomax = p.page(p.num_pages)
+    context={'licençageomax':licençageomax,'quanti_licenca':quanti_licenca}
     return render(request,'licencageomax.html',context)
 
 def licençasGeoEspecifica(request,id):
     if len(request.session.values())<=0:
         return redirect('user_login')
     try:
-        licençaserie=LicençaGeoMax.objects.get(id=id)
+        licençageomax=LicençaGeoMax.objects.get(id=id)
     except:
         return redirect('LicençaGeoMax')
-    context={'licençaserie':licençaserie,}
+    context={'licençageomax':licençageomax,}
     return render(request,'licencageomaxEspecifica.html',context)
 
 def createlicençasgeomax(request):
@@ -817,10 +828,14 @@ def createlicençasgeomax(request):
         cliente = Cliente.objects.filter(nome = cliente)
         if len(cliente.split()) == 0:
             messages.add_message(request, messages.INFO, 'Valor invalido.')
-            return render(request,'createlicencasurvx.html',)
+            clientes=Cliente.objects.all()
+            context={'clientes':clientes,}
+            return render(request,'createlicencageomax.html',context)
         if  len(cliente) == 0:
             messages.add_message(request, messages.INFO, 'Valores invalido.')
-            return render(request,'createlicencageomax.html',)
+            clientes=Cliente.objects.all()
+            context={'clientes':clientes,}
+            return render(request,'createlicencageomax.html',context)
         add_licenca = LicençaGeoMax.objects.create(cliente_id=cliente[0].id,situacao=situacao,Serial_Number=Serial_Number,cidade=cidade, Equipamento_Number=Equipamento_Number,)
         add_licenca.save()
         return redirect('LicençaGeoMax')
@@ -842,13 +857,20 @@ def EditarLicencaGeomax(request,id):
         situacao = request.POST.get('situacao') 
         if len(cliente.split())==0:
             messages.add_message(request, messages.INFO, 'Valor invalido.')
-            return render(request,'createlicencasurvx.html',)
+            clientes=Cliente.objects.all()
+            produtos=Produto.objects.all()
+            context={'licenca':licenca,'clientes':clientes,'produtos':produtos}
+            return render(request,'licencaEdita.html',context)
         cliente = Cliente.objects.filter(nome = cliente)
         if  len(cliente) == 0:
             messages.add_message(request, messages.INFO, 'Valores invalido.')
-            return render(request,'createlicencaserie.html',)
-        licenca=LicençaGeoMax.objects.get(id=id)
-        #licenca.update()
+            clientes=Cliente.objects.all()
+            produtos=Produto.objects.all()
+            context={'licenca':licenca,'clientes':clientes,'produtos':produtos}
+            return render(request,'licencaEdita.html',context)
+        licenca=LicençaGeoMax.objects.get(id__exact=id)
+        licenca.update(cliente_id=cliente[0].id,situacao=situacao,Serial_Number=Serial_Number,cidade=cidade, Equipamento_Number=Equipamento_Number,)
+        return redirect('LicençaGeoMax')
     try:
         licenca=LicençaGeoMax.objects.get(id=id)
     except:
@@ -872,6 +894,24 @@ def deletarLicencageomax(request,id):
     return render(request,'deletarlicenca.html',context)
 
 ### SurvX ###
+def licencasurvx(request):
+    if len(request.session.values())<=0:
+        return redirect('user_login')
+    licenca=LicençaSURVX.objects.all()
+    quanti_licenca=licenca.count()
+    p = Paginator(licenca, 10)
+    try:
+        page = int(request.GET.get('page', '1'))
+    except ValueError:
+        page = 1
+
+    # Se o page request (9999) está fora da lista, mostre a última página.
+    try:
+        licenca = p.page(page)
+    except (EmptyPage, InvalidPage):
+        licenca = p.page(p.num_pages)   
+    context={'licenca':licenca,'quanti_licenca':quanti_licenca}
+    return render(request,'licencaSurvx.html',context)
 
 def createlicençasSurvX(request):
     if len(request.session.values())<=0:
@@ -884,11 +924,15 @@ def createlicençasSurvX(request):
         Equipamento_Number = request.POST.get('Equipamento_Number')
         if len(cliente.split())==0:
             messages.add_message(request, messages.INFO, 'Valor invalido.')
-            return render(request,'createlicencasurvx.html',)
+            clientes=Cliente.objects.all()
+            context={'clientes':clientes,}
+            return render(request,'createlicencasurvx.html',context)
         cliente = Cliente.objects.filter(nome = cliente)
         if  len(cliente) == 0:
             messages.add_message(request, messages.INFO, 'Valores invalido.')
-            return render(request,'createlicencasurvx.html',)
+            clientes=Cliente.objects.all()
+            context={'clientes':clientes,}
+            return render(request,'createlicencasurvx.html',context)
         licenca = LicençaSURVX.objects.create(cliente_id=cliente[0].id,licença=licença,Transfer_ID=Transfer_ID,Serial_Number=Serial_Number,Equipamento_Number=Equipamento_Number)
         licenca.save()
         messages.add_message(request, messages.SUCCESS, 'Criado com Sucesso')
@@ -901,10 +945,10 @@ def licençasSurvXEspecifica(request,id):
     if len(request.session.values())<=0:
         return redirect('user_login')
     try:
-        licençaserie=LicençaSURVX.objects.get(id=id)
-    except:
+        licenca=LicençaSURVX.objects.get(id=id)
+    except: 
         return redirect('licençasSURVX')
-    context={'licençaserie':licençaserie,}
+    context={'licenca':licenca,}
     return render(request,'licencaSurvXEspecifica.html',context)
 
 def deletarlicencaSurvX(request,id):
@@ -923,8 +967,28 @@ def EditarLicencaSurvx(request,id):
     if len(request.session.values())<=0:
         return redirect('user_login')
     if request.method=='POST':
-        licenca=LicençaSURVX.objects.get(id=id)
-        #licenca.update()
+        cliente = request.POST.get('cliente')
+        licença = request.POST.get('licença')
+        Transfer_ID = request.POST.get('Transfer_ID')
+        Serial_Number = request.POST.get('Serial_Number')
+        Equipamento_Number = request.POST.get('Equipamento_Number')
+        if len(cliente.split())==0:
+            messages.add_message(request, messages.INFO, 'Valor invalido.')
+            clientes=Cliente.objects.all()
+            produtos=Produto.objects.all()
+            context={'licenca':licenca,'clientes':clientes,'produtos':produtos}
+            return render(request,'licencaEdita.html',context)
+        cliente = Cliente.objects.filter(nome = cliente)
+        if  len(cliente) == 0:
+            messages.add_message(request, messages.INFO, 'Valores invalido.')
+            clientes=Cliente.objects.all()
+            produtos=Produto.objects.all()
+            context={'licenca':licenca,'clientes':clientes,'produtos':produtos}
+            return render(request,'licencaEdita.html',context)
+        licenca=LicençaSURVX.objects.filter(id=id)
+        messages.add_message(request, messages.SUCCESS, 'Valores Alterados.')
+        licenca.update(cliente_id=cliente[0].id,licença=licença,Transfer_ID=Transfer_ID,Serial_Number=Serial_Number,Equipamento_Number=Equipamento_Number)
+        return redirect('licençasSURVX')
     try:
         licenca=LicençaSURVX.objects.get(id=id)
     except:
@@ -939,9 +1003,9 @@ def EditarLicencaSurvx(request,id):
 def licençasAplitop(request):
     if len(request.session.values())<=0:
         return redirect('user_login')
-    licençaserie=LicençaAplitop.objects.all()
-    quanti_licenca=licençaserie.count()
-    p = Paginator(licençaserie, 10)
+    licenca=LicençaAplitop.objects.all()
+    quanti_licenca=licenca.count()
+    p = Paginator(licenca, 10)
     try:
         page = int(request.GET.get('page', '1'))
     except ValueError:
@@ -949,10 +1013,10 @@ def licençasAplitop(request):
 
     # Se o page request (9999) está fora da lista, mostre a última página.
     try:
-        licençaserie = p.page(page)
+        licenca = p.page(page)
     except (EmptyPage, InvalidPage):
-        licençaserie = p.page(p.num_pages)
-    context={'licençaserie':licençaserie,'quanti_licenca':quanti_licenca}
+        licenca = p.page(p.num_pages)
+    context={'licenca':licenca,'quanti_licenca':quanti_licenca}
     return render(request,'licencaAplitop.html',context)
 
 def createlicençasAplitop(request):
@@ -966,11 +1030,15 @@ def createlicençasAplitop(request):
         status=request.POST.get('status')
         if len(cliente.split())==0:
             messages.add_message(request, messages.INFO, 'Valor invalido.')
-            return render(request,'createlicencaAplitop.html',)
+            clientes=Cliente.objects.all()
+            context={'clientes':clientes,}
+            return render(request,'createlicencaAplitop.html',context)
         cliente = Cliente.objects.filter(nome = cliente)
         if  len(cliente) == 0:
             messages.add_message(request, messages.INFO, 'Valores invalido.')
-            return render(request,'createlicencaAplitop.html',)
+            clientes=Cliente.objects.all()
+            context={'clientes':clientes,}
+            return render(request,'createlicencaAplitop.html',context)
         licenca=LicençaAplitop.objects.create(cliente_id=cliente[0].id,licença=licença,data_de_ativacao=data_de_ativacao,Serial_Number=Serial_Number,status=status)
         licenca.save()
         messages.add_message(request, messages.SUCCESS, 'Criado com Sucesso')
@@ -983,7 +1051,7 @@ def deletarlicencaaplitop(request,id):
     if len(request.session.values())<=0:
         return redirect('user_login')
     if request.method=='POST':
-        deletelicenca=LicençaAplitop.objects.get(id=id)
+        deletelicenca=LicençaAplitop.objects.get(id__exact=id)
         deletelicenca.delete()
         messages.add_message(request, messages.SUCCESS, 'Deletado com Sucesso')
         return redirect('LicençaAplitop')
@@ -995,10 +1063,30 @@ def EditarLicencaAplitop(request,id):
     if len(request.session.values())<=0:
         return redirect('user_login')
     if request.method=='POST':
-        licenca=LicençaAplitop.objects.get(id=id)
-        #licenca.update()
+        cliente=request.POST.get('cliente')
+        licença=request.POST.get('licença')
+        data_de_ativacao=request.POST.get('data_de_ativacao')
+        Serial_Number=request.POST.get('Serial_Number')
+        status=request.POST.get('status')
+        if len(cliente.split())==0:
+            messages.add_message(request, messages.INFO, 'Valor invalido.')
+            clientes=Cliente.objects.all()
+            produtos=Produto.objects.all()
+            context={'licenca':licenca,'clientes':clientes,'produtos':produtos}
+            return render(request,'licencaEdita.html',context)
+        cliente = Cliente.objects.filter(nome = cliente)
+        if  len(cliente) == 0:
+            messages.add_message(request, messages.INFO, 'Valores invalido.')
+            clientes=Cliente.objects.all()
+            produtos=Produto.objects.all()
+            context={'licenca':licenca,'clientes':clientes,'produtos':produtos}
+            return render(request,'licencaEdita.html',context)
+        licenca=LicençaAplitop.objects.filter(id__exact=id)
+        licenca.update(cliente_id=cliente[0].id,licença=licença,data_de_ativacao=data_de_ativacao,Serial_Number=Serial_Number,status=status)
+        messages.add_message(request, messages.SUCCESS, 'Valores Alterados.')
+        return redirect('LicençaAplitop')
     try:
-        licenca=LicençaAplitop.objects.get(id=id)
+        licenca=LicençaAplitop.objects.get(id__exact=id)
     except:
         return redirect('LicençaAplitop')
     clientes=Cliente.objects.all()
@@ -1010,11 +1098,13 @@ def LicençadeAplitopEspecifica(request,id):
     if len(request.session.values())<=0:
         return redirect('user_login')
     try:
-        licençaserie=LicençaAplitop.objects.get(id=id)
+        licença=LicençaAplitop.objects.get(id=id)
     except:
         return redirect('LicençaAplitop')
-    context={'licençaserie':licençaserie,}
+    context={'licença':licença,}
     return render(request,'licencaAplitopEspecifica.html',context)
+
+
 #Licença Surpad#
 
 def deletarLicencasurpad(request,id):
@@ -1042,12 +1132,16 @@ def createlicençasSurpad(request):
         modelo=request.POST.get('modelo')
         if len(cliente.split())==0:
             messages.add_message(request, messages.INFO, 'Valor invalido.')
-            return render(request,'createlicencasurpad.html',)
+            clientes=Cliente.objects.all()
+            context={'clientes':clientes,}
+            return render(request,'createlicencasurpad.html',context)
         cliente = Cliente.objects.filter(nome = cliente)
         if  len(cliente) == 0:
             messages.add_message(request, messages.INFO, 'Valores invalido.')
-            return render(request,'createlicencasurpad.html',)
-        licenca=LicençaSURVX.objects.create(cliente_id=cliente[0].id,licença=licença,Transfer_ID=Transfer_ID,Serial_Number=Serial_Number,modelo=modelo,situacao=situacao)
+            clientes=Cliente.objects.all()
+            context={'clientes':clientes,}
+            return render(request,'createlicencasurpad.html',context)
+        licenca=LicençaSurPad.objects.create(cliente_id=cliente[0].id,licença=licença,Transfer_ID=Transfer_ID,Serial_Number=Serial_Number,modelo=modelo,situacao=situacao)
         licenca.save()
         messages.add_message(request, messages.SUCCESS, 'Criado com Sucesso')
         return redirect('LicencaSurPad')
@@ -1079,10 +1173,10 @@ def licençasSurpadEspecifica(request,id):
     if len(request.session.values())<=0:
         return redirect('user_login')
     try:
-        licençaserie=LicençaSurPad.objects.get(id=id)
+        licença=LicençaSurPad.objects.get(id=id)
     except:
         return redirect('LicencaSurPad')
-    context={'licençaserie':licençaserie,}
+    context={'licença':licença,}
     return render(request,'licencaSurpadEspecifica.html',context)
 
 
@@ -1091,10 +1185,31 @@ def EditarLicencaSurpad(request,id):
     if len(request.session.values())<=0:
         return redirect('user_login')
     if request.method=='POST':
-        licenca=LicençaSurPad.objects.get(id=id)
-        #licenca.update()
+        cliente=request.POST.get('cliente')
+        licença=request.POST.get('licença')
+        Transfer_ID=request.POST.get('Transfer_ID')
+        Serial_Number=request.POST.get('Serial_Number')
+        situacao=request.POST.get('situacao')
+        modelo=request.POST.get('modelo')
+        if len(cliente.split())==0:
+            messages.add_message(request, messages.INFO, 'Valor invalido.')
+            clientes=Cliente.objects.all()
+            produtos=Produto.objects.all()
+            context={'licenca':licenca,'clientes':clientes,'produtos':produtos,}
+            return render(request,'licencaEdita.html',context) 
+        cliente = Cliente.objects.filter(nome = cliente)
+        if  len(cliente) == 0:
+            messages.add_message(request, messages.INFO, 'Cliente é Obrigatório.')
+            clientes=Cliente.objects.all()
+            produtos=Produto.objects.all()
+            context={'licenca':licenca,'clientes':clientes,'produtos':produtos,}
+            return render(request,'licencaEdita.html',context) 
+        licenca=LicençaSurPad.objects.filter(id__exact=id)
+        licenca.update(cliente_id=cliente[0].id,licença=licença,Transfer_ID=Transfer_ID,Serial_Number=Serial_Number,modelo=modelo,situacao=situacao)
+        messages.add_message(request, messages.SUCCESS, 'Valores Alterados.')
+        return redirect('LicencaSurPad')
     try:
-        licenca=LicençaSurPad.objects.get(id=id)
+        licenca=LicençaSurPad.objects.get(id__exact=id)
     except:
         return redirect('LicencaSurPad')
     clientes=Cliente.objects.all()
@@ -1102,7 +1217,68 @@ def EditarLicencaSurpad(request,id):
     context={'licenca':licenca,'clientes':clientes,'produtos':produtos,}
     return render(request,'licencaEdita.html',context) 
      
-#####################
+####X-Pad#####
+def licencaxpad(request):
+    if len(request.session.values())<=0:
+        return redirect('user_login')
+    licencaxpad=LicençaXPAD.objects.all()
+    quanti_licenca=licencaxpad.count()
+    p = Paginator(licencaxpad, 10)
+    try:
+        page = int(request.GET.get('page', '1'))
+    except ValueError:
+        page = 1
+
+    # Se o page request (9999) está fora da lista, mostre a última página.
+    try:
+        licencaxpad = p.page(page)
+    except (EmptyPage, InvalidPage):
+        licencaxpad = p.page(p.num_pages)
+    context={'licencaxpad':licencaxpad,'quanti_licenca':quanti_licenca}
+    return render(request,'licencaXPAD.html',context)
+
+def createlicençasXPAD(request):
+    if len(request.session.values())<=0:
+        return redirect('user_login')
+    if request.method=='POST':
+        cliente=request.POST.get('cliente')
+        licença=request.POST.get('licença')
+        Transfer_ID=request.POST.get('Transfer_ID')
+        Serial_Number=request.POST.get('Serial_Number')
+        Equipamento_Number = request.POST.get('Equipamento_Number')
+        situacao=request.POST.get('situacao')
+        modelo=request.POST.get('modelo')
+        descricao=request.POST.get('descricao')
+        if len(cliente.split())==0:
+            messages.add_message(request, messages.INFO, 'Valor invalido.')
+            clientes=Cliente.objects.all()
+            context={'clientes':clientes,}
+            return render(request,'createXPAD.html',context)
+        cliente = Cliente.objects.filter(nome = cliente)
+        if  len(cliente) == 0:
+            messages.add_message(request, messages.INFO, 'Valores Cliente invalido.')
+            clientes=Cliente.objects.all()
+            context={'clientes':clientes,}
+            return render(request,'createXPAD.html',context)
+        licenca=LicençaXPAD.objects.create(cliente_id=cliente[0].id,licença=licença,Transfer_ID=Transfer_ID,Serial_Number=Serial_Number,modelo=modelo,situacao=situacao,Equipamento_Number=Equipamento_Number,descriçao=descricao)
+        licenca.save()
+        messages.add_message(request, messages.SUCCESS, 'Criado com Sucesso')
+        return redirect('licençasXPAD')
+    clientes=Cliente.objects.all()
+    context={'clientes':clientes,}
+    return render(request,'createXPAD.html',context)
+
+def licencaxpadEspecifica(request,id):
+    if len(request.session.values())<=0:
+        return redirect('user_login')
+    try:
+        licenca=LicençaXPAD.objects.get(id=id)
+    except:
+        return redirect('licençasXPAD')
+    context={'licenca':licenca,}
+    return render(request,'licencaXPADEspecifica.html',context)
+
+
 def deletarlicencaxpad(request,id):
     if len(request.session.values())<=0:
         return redirect('user_login')
@@ -1118,19 +1294,75 @@ def deletarlicencaxpad(request,id):
 def EditarLicencaXpad(request,id):
     if len(request.session.values())<=0:
         return redirect('user_login')
-    if request.method=='POST':
-        licenca=LicençaXPAD.objects.get(id=id)
-        #licenca.update()
     try:
         licenca=LicençaXPAD.objects.get(id=id)
     except:
+        return redirect('licençasXPAD')
+    if request.method=='POST':
+        cliente=request.POST.get('cliente')
+        licença=request.POST.get('licença')
+        Transfer_ID=request.POST.get('Transfer_ID')
+        Serial_Number=request.POST.get('Serial_Number')
+        Equipamento_Number = request.POST.get('Equipamento_Number')
+        situacao=request.POST.get('situacao')
+        modelo=request.POST.get('modelo')
+        descricao=request.POST.get('descricao')
+        if len(cliente.split())==0:
+            messages.add_message(request, messages.INFO, 'Valores invalido,Não esqueça do Cliente.')
+            clientes=Cliente.objects.all()
+            produtos=Produto.objects.all()
+            context={'licenca':licenca,'clientes':clientes,'produtos':produtos,}
+            return render(request,'licencaEdita.html',context) 
+
+        cliente = Cliente.objects.filter(nome = cliente)
+        if  len(cliente) == 0:
+            messages.add_message(request, messages.INFO, 'Valores Cliente invalido.')
+            clientes=Cliente.objects.all()
+            produtos=Produto.objects.all()
+            context={'licenca':licenca,'clientes':clientes,'produtos':produtos,}
+            return render(request,'licencaEdita.html',context) 
+        licenca=LicençaXPAD.objects.filter(id__exact=id)
+        licenca.update(cliente_id=cliente[0].id,licença=licença,Transfer_ID=Transfer_ID,Serial_Number=Serial_Number,modelo=modelo,situacao=situacao,Equipamento_Number=Equipamento_Number,descriçao=descricao)
+        messages.add_message(request, messages.SUCCESS, 'Valores Alterados.')
         return redirect('licençasXPAD')
     clientes=Cliente.objects.all()
     produtos=Produto.objects.all()
     context={'licenca':licenca,'clientes':clientes,'produtos':produtos,}
     return render(request,'licencaEdita.html',context) 
 
-########################
+#####Kit de locação#########
+
+def kitlocacao(request):
+    if len(request.session.values())<=0:
+        return redirect('user_login')
+    licenca=KitLocacao.objects.all()
+    quanti_licenca=licenca.count()
+    p = Paginator(licenca, 10)
+    try:
+        page = int(request.GET.get('page', '1'))
+    except ValueError:
+        page = 1
+
+    # Se o page request (9999) está fora da lista, mostre a última página.
+    try:
+        licenca = p.page(page)
+    except (EmptyPage, InvalidPage):
+        licenca = p.page(p.num_pages)
+    context={'licenca':licenca,'quanti_licenca':quanti_licenca}
+    return render(request,'kitlocacao.html',context)
+
+
+def kitlocacaoEspecifica(request,id):
+    if len(request.session.values())<=0:
+        return redirect('user_login')
+    try:
+        licenca=KitLocacao.objects.get(id=id)
+    except:
+        return redirect('kitlocacao')
+    context={'licenca':licenca,}
+    return render(request,'kitlocacaoEspecifica.html',context)
+
+
 def deletarkit(request,id):
     if len(request.session.values())<=0:
         return redirect('user_login')
@@ -1147,13 +1379,54 @@ def EditarLicencakit(request,id):
     if len(request.session.values())<=0:
         return redirect('user_login')
     if request.method=='POST':
-        licenca=KitLocacao.objects.get(id=id)
-        licenca.update()
+        modelo=request.POST.get('modelo')
+        modelo_coletora=request.POST.get('modelo_coletora')
+        Serial_Number_base=request.POST.get('Serial_Number_base')
+        Serial_Number_rover=request.POST.get('Serial_Number_rover')
+        Serial_Number_coletora = request.POST.get('Serial_Number_coletora')
+        Serial_Number=request.POST.get('Serial_Number')
+        Aplicativo=Aplicativo=request.POST.get('Aplicativo')
+        Número_do_Kit=request.POST.get('Número_do_Kit')
+        Equipment_ID=request.POST.get('Equipment_ID')
+        licenca=KitLocacao.objects.filter(id__exact=id)
+        if len(licenca)==0:
+            return redirect('kitlocacao')
+        messages.add_message(request, messages.SUCCESS, 'Valores Alterados.')
+        licenca.update(
+            modelo=modelo,modelo_coletora=modelo_coletora,
+            Serial_Number_base=Serial_Number_base,Serial_Number_rover=Serial_Number_rover,
+            Serial_Number_coletora=Serial_Number_coletora,Serial_Number=Serial_Number,
+            Aplicativo=Aplicativo,Número_do_Kit=Número_do_Kit,Equipment_ID=Equipment_ID
+            )
+        return redirect('kitlocacao')
     try:
         licenca=KitLocacao.objects.get(id=id)
     except:
         return redirect('kitlocacao')
-    clientes=Cliente.objects.all()
-    produtos=Produto.objects.all()
-    context={'licenca':licenca,'clientes':clientes,'produtos':produtos}
+    context={'licenca':licenca,}
     return render(request,'licencaEdita.html',context) 
+
+def createkitlocacao(request):
+    if len(request.session.values())<=0:
+        return redirect('user_login')
+    if request.method=='POST':
+        modelo=request.POST.get('modelo')
+        modelo_coletora=request.POST.get('modelo_coletora')
+        Serial_Number_base=request.POST.get('Serial_Number_base')
+        Serial_Number_rover=request.POST.get('Serial_Number_rover')
+        Serial_Number_coletora = request.POST.get('Serial_Number_coletora')
+        Serial_Number=request.POST.get('Serial_Number')
+        Aplicativo=request.POST.get('Aplicativo')
+        Número_do_Kit=request.POST.get('Número_do_Kit')
+        Equipment_ID=request.POST.get('Equipment_ID')
+        licenca=KitLocacao.objects.create(modelo=modelo,modelo_coletora=modelo_coletora,
+            Serial_Number_base=Serial_Number_base,Serial_Number_rover=Serial_Number_rover,
+            Serial_Number_coletora=Serial_Number_coletora,Serial_Number=Serial_Number,
+            Aplicativo=Aplicativo,Número_do_Kit=Número_do_Kit,Equipment_ID=Equipment_ID
+        )
+        licenca.save()
+        messages.add_message(request, messages.SUCCESS, 'Criado com Sucesso')
+        return redirect('kitlocacao')
+    produtos=Produto.objects.all()
+    context={'produtos':produtos,}
+    return render(request,'createkitlocacao.html',context)

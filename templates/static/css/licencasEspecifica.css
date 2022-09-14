@@ -8,10 +8,34 @@
     display: flex;
     flex-direction:column;
     width: 60%;
-    padding: 1rem;
+    padding: 1.5rem;
     justify-content: center;
     background-color: rgba(255, 255, 0, 0.521);
     border: 1px solid black;
     border-radius: 1rem;
     box-shadow: 0.5rem 0.3rem 1rem 0.5rem black;
+}
+
+.span_Especifico{
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+}
+
+
+.button_deleta_especifico,.button_editar_especifico{
+    color: black;
+    font-size: medium;
+    font-weight: bold;
+}
+
+.button_deleta_especifico:hover,.button_editar_especifico:hover{
+    width: max-content;
+    padding: 1rem;
+    color: silver;
+    border-radius: 1rem;
+    background-color: black;
+    font-size: medium;
+    font-weight: bold;
+    transition: 1s;
 }

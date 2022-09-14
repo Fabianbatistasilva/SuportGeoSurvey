@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="{% static 'css/Criandolicencas.css'%}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="static/materialize/css/materialize.min.css"  media="screen,projection"/>
-    <title>{%block 'title'%}Criando Licença de Série{%endblock%}</title>
+    <title>{%block 'title'%}Criando Kit locação{%endblock%}</title>
 </head>
 {%block 'conteudo'%}
 <div class="body_createlicenca">
     <div  class="cont_createlicenca">
-        <h1>Criando Licença de Série</h1>
+        <h1>Criando Kit locação</h1>
         <div>
             <form action="" method="post">{% csrf_token %}
                 <div class="message_div">
@@ -27,41 +27,58 @@
                     {% endif %}           
                 </div>
                 <span>
-                    <h6 for="">Cliente</h6>
-                    <input list="clientelist" type="text" placeholder="Adicione o Cliente" name="cliente" id="">
-                    <datalist id="clientelist">
-                        {% for cliente in clientes %}
-                        <option value="{{cliente.nome}}">
-                        {% endfor %}
-                    </datalist>
-                </span>
-                <span>
-                    <h6 for="">Empresa</h6>
-                    <input placeholder="Adicione a empresa" name="empresa" id="" type="text">
-                </span>
-                <span>
-                    <h6>Cidade</h6>
-                    <input placeholder="Adicione a Cidade" name="cidade" id="" type="text">
-                </span>
-                <span>
-                    <h6>Produto</h6>
-                    <input list="produtolist" placeholder="Adicione o Produto" name="produto" id="" type="text">
-                    <datalist id="produtolist">
+                    <h6 for="">Modelo</h6>
+                    <input list="modelolist" type="text" placeholder="Adicione o modelo" name="modelo" id="">
+                    <datalist id="modelolist">
                         {% for produto in produtos %}
                         <option value="{{produto}}">
                         {% endfor %}
                     </datalist>
                 </span>
                 <span>
-                    <h6>Número de Série</h6>
-                    <input placeholder="Adicione o Número de Série" type="text" name="numerodeserie" id="">
+                    <h6 for="">Modelo coletora</h6>
+                    <input list="modelolist" placeholder="adicione o modelo da coletora" type="text" name="modelo_coletora" id="">
+                    <datalist id="modelolist">
+                        {% for produto in produtos %}
+                        <option value="{{produto}}">
+                        {% endfor %}
+                    </datalist>
                 </span>
                 <span>
-                    <h6>Observações</h6>
-                    <textarea class="text_area_observ" name="Observacao" id="" cols="50" rows="50">
-
-                    </textarea>
+                    <h6>Serial Number Base</h6>
+                    <input placeholder="Adicione o Serial Number base" name="Serial_Number_base" id="" type="text">
                 </span>
+                
+                <span>
+                    <h6>Serial Number Rover</h6>
+                    <input placeholder="Adicione o Serial Number rover" type="text" name="Serial_Number_rover" id="">
+                </span>
+
+                <span>
+                    <h6>Serial Number Coletora</h6>
+                    <input placeholder="Adicione o Serial Number coletora" type="text" name="Serial_Number_coletora" id="">
+                </span>
+
+                <span>
+                    <h6>Serial Number </h6>
+                    <input placeholder="Adicione o Serial Number" type="text" name="Serial_Number" id="">
+                </span>
+
+                <span>
+                    <h6> Aplicativo </h6>
+                    <input placeholder="Adicione o Aplicativo" type="text" name="Aplicativo" id="">
+                </span>
+
+                <span>
+                    <h6> Número do Kit </h6>
+                    <input placeholder="Adicione o Número do Kit" type="text" name="Número_do_Kit" id="">
+                </span>
+
+                <span>
+                    <h6> Equipment ID </h6>
+                    <input placeholder="Adicione o Equipment ID" type="text" name="Equipment_ID" id="">
+                </span>
+
                 <button class="btn waves-effect grey darken-4" type="submit" name="action">Submit
                     <i class="material-icons right">send</i>
                   </button>

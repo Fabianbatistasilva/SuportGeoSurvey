@@ -14,9 +14,9 @@
 <div class="body_del_edit">
     <div class="mess_del">
         <form method="post" action="">{% csrf_token %}
-            <label for="">
+            <h6 for="">
                 Você tem certeza em excluir essa Licença?
-            </label>
+            </h6>
             {%if licenca.cliente %}
             <h3>{{licenca.cliente}}</h3>
             {%else%}
@@ -47,6 +47,7 @@
             <label for="">Transfer_ID: {{licenca.Transfer_ID}}</label>
             <br>
             {%endif%}
+            <hr>
             <div>
                 <button class="btn waves-effect grey darken-4" type="submit" name="action">Deletar
                     <i class="material-icons right">send</i>
