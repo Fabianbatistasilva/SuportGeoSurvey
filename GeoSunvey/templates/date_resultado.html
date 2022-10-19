@@ -5,7 +5,7 @@
 <div class="body_date_resultado">
     <div class="cont_date">
         {%if pesquisaocorrencia%}
-        <h5>Ocorrencia</h5>
+        <h4>Ocorrencia</h4>
         <table>
             <thead>
                 <tr>
@@ -33,14 +33,54 @@
                     <td><a href="{% url 'deletecorrencia' ocorrencia.id %}">Deletar</a></td>
                 </tr>
                 {%endfor%}
+                
+                    
             </tbody>
         </table>
+        <br>
         {%else%}
         <div class="nonepesquisa">
             <h2 for="">Pesquisa não existe</h2>
             <a href="{% url 'home'%}">Voltar para Home</a>
         </div>
         {%endif%}
+        <hr>
+        <br>
+        {% if dadosames %}
+                <h5>Esse mês tivemos esse casos</h5>
+                <h6 for="">Total de casos : {{dadosames.count}}</h6>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Tipo</th>
+                            <th>Equipamento</th>
+                            <th>Data</th>
+                            <th>Status</th>
+                            <th>Editar</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for mes in dadosames%}
+                        <tr>
+                            <td><a href="{% url 'ocorrenciauser' mes.id %}">{{mes.tipo}}</a></td>
+                            <td>{{mes.cliente}}</td>
+                            <td>{{mes.equipamento}}</td>
+                            <td>{{mes.created}}</td>
+                            {% if mes.status == 'Aberto' %}
+                            <td class="ocorrencia_disp">{{mes.status}}</td>
+                            <td><a href="{% url 'finalizarocorrencia' mes.id %}">Finalizar</a></td>
+                            {%else%}
+                            <td class="ocorrencia_concluido">Finalizado</td>
+                            <td><a href="{% url 'abrirocorrencia' mes.id %}">Abrir</a></td>
+                            {%endif%}
+                            <td><a href="{% url 'deletecorrencia' mes.id %}">Deletar</a></td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+        {% endif %}
     </div>
 </div>
 {%endblock%}

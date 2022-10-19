@@ -51,7 +51,7 @@
                             </i>Acrescentar</a>
                         </div>
                         <div>
-                            {%if ocorrencia.status == 'Aberto' %}
+                            {%if ocorrencia.status == 'Aberto' or  ocorrencia.status == 'Atendendo' %}
                             <form action="{% url 'finalizarocorrencia' ocorrencia.id %}" method="post">{% csrf_token %}
                                 <button class="waves-effect waves-light btn black"><i class="material-icons right">beenhere
                                         </i>Finalizar</button>

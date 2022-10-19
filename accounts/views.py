@@ -2,7 +2,6 @@ from django.shortcuts import redirect, render
 from GeoSunvey.models import Ocorrencia,Cliente,Produto, tiposProduto,Funcionarios
 from GeoSunvey.serializers import OcorrenciaSerializer,ClienteSerializer,ProdutoSerializer
 from django.contrib.auth import authenticate, login,logout
-import pandas as pd
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponse

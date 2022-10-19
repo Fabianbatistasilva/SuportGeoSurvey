@@ -5,7 +5,6 @@ from GeoSunvey.models import Funcionarios, KitLocacao, Ocorrencia,Cliente, Venda
 from GeoSunvey.serializers import OcorrenciaSerializer,ClienteSerializer,ProdutoSerializer
 import requests
 from django.contrib.auth import authenticate, login,logout
-import pandas as pd
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponse
@@ -30,10 +29,13 @@ def date_resultado(request):
     if len(request.session.values())<=0:
         return redirect('user_login')
     pesquisa=request.GET.get("search")
+    datames = pesquisa.replace('-',' ')
+    datames = datames.split()
+    dadosames = Ocorrencia.objects.filter(created__month=datames[1],created__year = datames[0])
     if len(pesquisa.strip())<=0 or pesquisa =='':
         return render(request,'date_resultado.html',)
     pesquisaocorrencia = Ocorrencia.objects.filter(Q(compra__icontains=pesquisa)|Q(garantia__icontains=pesquisa)|Q(created__icontains=pesquisa)|Q(updated__icontains=pesquisa))
-    context={'pesquisaocorrencia':pesquisaocorrencia,}
+    context={'pesquisaocorrencia':pesquisaocorrencia,'dadosames':dadosames}
     return render(request,'date_resultado.html',context)       
 
 
@@ -52,11 +54,12 @@ def search_resultado(request):
         return render(request,'pesquisabase.html',)
     else:
         if tipoProduto:
-            pesquisaproduto=Produto.objects.filter(Q(name__icontains=pesquisa)|Q(modelo__icontains=pesquisa)|Q(marca__icontains=pesquisa)|Q(tipo_id=tipoProduto[0].id))
+            pesquisaproduto = Produto.objects.filter(Q(name__icontains=pesquisa)|Q(modelo__icontains=pesquisa)|Q(marca__icontains=pesquisa)|Q(tipo_id=tipoProduto[0].id))
         else:
-            pesquisaproduto=Produto.objects.filter(Q(name__icontains=pesquisa)|Q(modelo__icontains=pesquisa)|Q(marca__icontains=pesquisa))
-        pesquisacliente=Cliente.objects.filter(Q(nome__icontains=pesquisa)|Q(tipo__icontains=pesquisa)|Q(telefone__icontains=pesquisa)|Q(email__icontains=pesquisa))
-        pesquisameta=metaEquipe.objects.filter(Q(Equipe__icontains=pesquisa)|Q(descricao__icontains=pesquisa)|Q(objetivo__icontains=pesquisa))
+            pesquisaproduto = Produto.objects.filter(Q(name__icontains=pesquisa)|Q(modelo__icontains=pesquisa)|Q(marca__icontains=pesquisa))
+        pesquisacliente = Cliente.objects.filter(Q(nome__icontains=pesquisa)|Q(tipo__icontains=pesquisa)|Q(telefone__icontains=pesquisa)|Q(email__icontains=pesquisa))
+        pesquisameta = metaEquipe.objects.filter(Q(Equipe__icontains=pesquisa)|Q(descricao__icontains=pesquisa)|Q(objetivo__icontains=pesquisa))
+
         context={'pesquisacliente':pesquisacliente,'pesquisaocorrencia':pesquisaocorrencia,'pesquisaproduto':pesquisaproduto,'pesquisameta':pesquisameta,}
         return render(request,'pesquisabase.html',context)
 
@@ -216,11 +219,14 @@ def form_atendimento(request):
             messages.add_message(request, messages.INFO, 'Coloque os Valores Obrigatórios(Cliente,Técnico,Status,Produto)')
             return redirect('atender')
         else:
-            cliente=Cliente.objects.get(nome=clientes)
+            cliente=Cliente.objects.filter(nome=clientes)
+            print(cliente)
             tecnico=Funcionarios.objects.filter(nome__icontains=tecnico)
-            tecnico=Funcionarios.objects.get(id=tecnico[0].id)
-            produtos=Produto.objects.get(name=produto)
-            add_atender=Ocorrencia.objects.create(cliente_id=cliente.id,tipo=tipoatendimento,descricao=descricao,equipamento_id=produtos.id,status=status,file=file,compra=compra,garantia=garantia,criador_id=tecnico.id)
+            produtos=Produto.objects.filter(name=produto)
+            if len(cliente) == 0 or len(tecnico) == 0 or len(produtos)==0:
+                messages.add_message(request, messages.INFO, 'Coloque os Valores que existem no Cliente,Técnico,Status e Produto')
+                return redirect('atender')
+            add_atender=Ocorrencia.objects.create(cliente_id=cliente[0].id,tipo=tipoatendimento,descricao=descricao,equipamento_id=produtos[0].id,status=status,file=file,compra=compra,garantia=garantia,criador_id=tecnico[0].id)
             add_atender.save()
             messages.add_message(request, messages.SUCCESS, 'Criado com Sucesso')
             return redirect('listocorrencia')
