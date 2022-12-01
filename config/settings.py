@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-#w817ez@ud+r32t@0#bl+0xegg1)l*y2ava&1ih@6*_e$oprrd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1','https://6388d8c524ec9c0cbc279793--geosurveysuporte.netlify.app','geosurveysuporte.netlify.app']
 
 
 # Application definition

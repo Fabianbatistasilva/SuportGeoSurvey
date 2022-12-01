@@ -219,10 +219,9 @@ def form_atendimento(request):
             messages.add_message(request, messages.INFO, 'Coloque os Valores Obrigatórios(Cliente,Técnico,Status,Produto)')
             return redirect('atender')
         else:
-            cliente=Cliente.objects.filter(nome=clientes)
-            print(cliente)
-            tecnico=Funcionarios.objects.filter(nome__icontains=tecnico)
-            produtos=Produto.objects.filter(name=produto)
+            cliente = Cliente.objects.filter(nome=clientes)
+            tecnico = Funcionarios.objects.filter(nome__icontains=tecnico)
+            produtos = Produto.objects.filter(name=produto)
             if len(cliente) == 0 or len(tecnico) == 0 or len(produtos)==0:
                 messages.add_message(request, messages.INFO, 'Coloque os Valores que existem no Cliente,Técnico,Status e Produto')
                 return redirect('atender')
