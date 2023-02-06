@@ -210,7 +210,9 @@ body{
     transition: 1s;
 }
 
-
+.text-login{
+    overflow: hidden;
+}
 .success{
     width: 100%;
     height: 100%;

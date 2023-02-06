@@ -10,8 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -19,13 +20,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
+CSRF_TRUSTED_ORIGINS = ['https://fabiangeo.c1er5ozkffd9.us-east-1.rds.amazonaws.com', 'https://suporte.fly.dev',]
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-#w817ez@ud+r32t@0#bl+0xegg1)l*y2ava&1ih@6*_e$oprrd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','https://6388d8c524ec9c0cbc279793--geosurveysuporte.netlify.app','geosurveysuporte.netlify.app']
+ALLOWED_HOSTS = ['http://127.0.0.1:8000', '*', 'https://suporte.fly.dev','suporte.fly.dev', 'https://fabiangeo.c1er5ozkffd9.us-east-1.rds.amazonaws.com']
 
 
 # Application definition
@@ -43,8 +45,17 @@ INSTALLED_APPS = [
     'accounts',
 ]
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STORAGES = {
+    # ...
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -58,7 +69,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,15 +89,15 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = { 
-    'default': { 
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
-        'NAME': 'GeoSurveyDB', 
-        'USER': 'postgres', 
-        'PASSWORD': 'GeoSurvey', 
-        'HOST': '127.0.0.1', 
-        'PORT': '5432', 
-    } 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'FabianGeo',
+        'USER': 'postgres',
+        'PASSWORD': 'de223344',
+        'HOST': 'fabiangeo.c1er5ozkffd9.us-east-1.rds.amazonaws.com',
+        'PORT': '5432',
+    }
 }
 
 # Password validation
@@ -127,12 +138,12 @@ USE_L10N = False
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'templates/static')
+    os.path.join(BASE_DIR, 'templates/static')
 ]
 STATIC_ROOT = "staticfiles"
 
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'data/') # 'data' is my media folder
+MEDIA_ROOT = os.path.join(BASE_DIR, 'data/')  # 'data' is my media folder
 MEDIA_URL = '/media/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
